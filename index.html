@@ -544,7 +544,8 @@
                     <div class="flower-center" style="width: 25px; height: 25px;">
                         <div class="center-detail"></div>
                     </div>
-                    <div class="petals">
+ 
+                 <div class="petals">
                         <div class="petal"></div>
                         <div class="petal"></div>
                         <div class="petal"></div>
@@ -559,4 +560,103 @@
                         <div class="petal"></div>
                         <div class="petal"></div>
                         <div class="petal"></div>
-     
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                    </div>
+                </div>
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+            </div>
+        </div>
+
+        <!-- Corazón -->
+        <div id="heart">❤️</div>
+
+        <div id="random-message"></div>
+    </div>
+
+    <!-- Sonido del corazón -->
+    <audio id="heartbeat-sound" preload="auto">
+        <source src="https://www.soundjay.com/human/heartbeat-01.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <script>
+        // Texto principal animado
+        const text = "Las flores amarillas representan la felicidad.\nY tú eres la mía ❤️";
+        let i = 0;
+        const speed = 80;
+        const mainMessage = document.getElementById("main-message");
+        const heart = document.getElementById("heart");
+        const heartbeatSound = document.getElementById("heartbeat-sound");
+
+        function typeWriter() {
+            if (i < text.length) {
+                mainMessage.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                // Mostrar corazón con sonido
+                setTimeout(() => {
+                    heart.style.opacity = 1;
+                    document.body.addEventListener("click", () => {
+                        setInterval(() => {
+                            heartbeatSound.currentTime = 0;
+                            heartbeatSound.play().catch(e => console.log("Reproducción de audio prevenida:", e));
+                        }, 1500);
+                    }, { once: true });
+                }, 4000);
+                startRandomMessages();
+            }
+        }
+        
+        // Iniciar la animación cuando la página cargue
+        window.addEventListener('DOMContentLoaded', (event) => {
+            typeWriter();
+        });
+
+        // Estrellitas cayendo
+        function createStar() {
+            const star = document.createElement("div");
+            star.innerHTML = "✦";
+            star.classList.add("star");
+            star.style.left = Math.random() * window.innerWidth + "px";
+            star.style.fontSize = (Math.random() * 1.2 + 0.4) + "rem";
+            star.style.animationDuration = (2 + Math.random() * 3) + "s";
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), 5000);
+        }
+        setInterval(createStar, 250);
+
+        // Mensajes aleatorios
+        const messages = [
+            "Eres la mejor niña.",
+            "Siempre pienso en ti princesa.",
+            "Tú eres mi alegría.",
+            "Mi solecito.",
+            "Tu sonrisa ilumina mis días.",
+            "Eres mi razón para sonreír.",
+            "Cada día a tu lado es especial.",
+            "Eres el mejor regalo de la vida."
+        ];
+        const randomMessage = document.getElementById("random-message");
+
+        function startRandomMessages() {
+            setInterval(() => {
+                const msg = messages[Math.floor(Math.random() * messages.length)];
+                randomMessage.innerText = msg;
+                randomMessage.style.opacity = 1;
+                setTimeout(() => randomMessage.style.opacity = 0, 3000);
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
