@@ -1,413 +1,440 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Para ti ❤️ - Mi Página Especial</title>
-  <meta name="description" content="Una página especial con amor">
-  <style>
-    /* Variables para colores y estilos */
-    :root {
-      --color-primary: #ffcc00;
-      --color-secondary: #ff6b6b;
-      --color-background: rgba(0, 0, 0, 0.6);
-      --color-text: #ffffff;
-      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), 
-                  url('https://images.unsplash.com/photo-1501973801540-537f08ccae7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
-      font-family: var(--font-main);
-      text-align: center;
-      overflow-x: hidden;
-      padding: 5vw;
-      position: relative;
-    }
-    
-    /* Mejora de la barra de navegación */
-    .navbar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 15px 0;
-      z-index: 1000;
-      backdrop-filter: blur(5px);
-    }
-    
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 20px;
-    }
-    
-    .logo {
-      color: var(--color-primary);
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-    
-    .nav-links {
-      display: flex;
-      list-style: none;
-    }
-    
-    .nav-links li {
-      margin-left: 20px;
-    }
-    
-    .nav-links a {
-      color: var(--color-text);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    
-    .nav-links a:hover {
-      color: var(--color-primary);
-    }
-    
-    /* Texto principal mejorado */
-    #main-message {
-      font-size: clamp(1.2rem, 5vw, 2.2rem);
-      max-width: 95%;
-      white-space: pre-wrap;
-      border-right: 2px solid var(--color-text);
-      width: fit-content;
-      animation: blink 0.8s infinite;
-      margin-bottom: 3vh;
-      color: var(--color-text);
-      background: var(--color-background);
-      padding: 15px 20px;
-      border-radius: 15px;
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9),
-                   0 0 10px var(--color-primary);
-      line-height: 1.6;
-      backdrop-filter: blur(5px);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1501973801540-537f08ccae7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+            padding: 20px;
+            color: #fff;
+        }
 
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
+        /* Contenedor principal */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-    /* SVG Ramo de girasoles mejorado */
-    #flowers {
-      width: clamp(220px, 60vw, 450px);
-      height: auto;
-      margin-top: 3vh;
-      filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.5));
-    }
+        /* Texto principal */
+        #main-message {
+            font-size: clamp(1.2rem, 5vw, 2.2rem);
+            white-space: pre-wrap;
+            border-right: 2px solid white;
+            width: fit-content;
+            animation: blink 0.8s infinite;
+            margin-bottom: 3vh;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px 20px;
+            border-radius: 15px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+            line-height: 1.6;
+            backdrop-filter: blur(5px);
+            text-align: center;
+        }
 
-    #flowers .stem {
-      fill: none;
-      stroke: #2e8b57;
-      stroke-width: 6;
-      stroke-dasharray: 1000;
-      stroke-dashoffset: 1000;
-      animation: draw 4s forwards;
-    }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
 
-    #flowers .petal {
-      fill: var(--color-primary);
-      fill-opacity: 0;
-      stroke: #ff8c00;
-      stroke-width: 2;
-      stroke-dasharray: 1000;
-      stroke-dashoffset: 1000;
-      animation: draw 4s forwards, fillIn 2s forwards;
-      animation-delay: 0s, 4s;
-    }
+        /* Contenedor de flores */
+        .flower-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
 
-    #flowers .center {
-      fill: #8b4513;
-      opacity: 0;
-      animation: fadeIn 2s forwards;
-      animation-delay: 5s;
-    }
+        /* Girasoles mejorados */
+        .sunflower {
+            position: absolute;
+            bottom: 0;
+            transform-origin: bottom center;
+            animation: sway 6s ease-in-out infinite;
+            z-index: 1;
+        }
 
-    /* Animación de balanceo mejorada */
-    .sunflower {
-      transform-origin: center bottom;
-      animation: sway 4s ease-in-out infinite;
-    }
+        .sunflower:nth-child(1) {
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 0s;
+            z-index: 5;
+        }
 
-    .sunflower:nth-child(2) {
-      animation-delay: 1s;
-    }
+        .sunflower:nth-child(2) {
+            left: 35%;
+            animation-delay: 1s;
+            z-index: 4;
+        }
 
-    .sunflower:nth-child(3) {
-      animation-delay: 2s;
-    }
+        .sunflower:nth-child(3) {
+            left: 65%;
+            animation-delay: 2s;
+            z-index: 4;
+        }
 
-    @keyframes draw {
-      to { stroke-dashoffset: 0; }
-    }
+        .sunflower:nth-child(4) {
+            left: 25%;
+            animation-delay: 0.5s;
+            z-index: 3;
+        }
 
-    @keyframes fillIn {
-      to { fill-opacity: 1; }
-    }
+        .sunflower:nth-child(5) {
+            left: 75%;
+            animation-delay: 1.5s;
+            z-index: 3;
+        }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
+        .stem {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 8px;
+            background: linear-gradient(to top, #2e8b57, #3cb371, #2e8b57);
+            border-radius: 4px;
+            transform: translateX(-50%);
+            height: 0;
+            animation: growStem 3s forwards;
+        }
 
-    @keyframes sway {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(2deg); }
-      50% { transform: rotate(-2deg); }
-      75% { transform: rotate(2deg); }
-    }
+        .flower-head {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            animation: growFlower 2s forwards;
+            animation-delay: 2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    /* Estrellitas mejoradas */
-    .star {
-      position: absolute;
-      top: -10px;
-      color: var(--color-primary);
-      font-size: 0.6rem;
-      animation: fall linear;
-      z-index: 1;
-    }
+        .center {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background-color: #8B4513;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
 
-    @keyframes fall {
-      to {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
+        .petal {
+            position: absolute;
+            background-color: #FFD700;
+            width: 25px;
+            height: 60px;
+            border-radius: 50% 50% 50% 50%/60% 60% 40% 40%;
+            transform-origin: bottom center;
+            opacity: 0;
+            animation: showPetals 1s forwards;
+            animation-delay: 3s;
+        }
 
-    /* Mensajes aleatorios mejorados */
-    #random-message {
-      position: absolute;
-      bottom: 8%;
-      font-size: clamp(1rem, 3vw, 1.6rem);
-      opacity: 0;
-      transition: opacity 2s;
-      padding: 0 5vw;
-      color: var(--color-text);
-      text-shadow: 2px 2px 5px black;
-      background: var(--color-background);
-      border-radius: 10px;
-      padding: 10px 15px;
-      max-width: 90%;
-      backdrop-filter: blur(5px);
-    }
+        /* Posicionamiento de pétalos */
+        .petal:nth-child(1) { transform: rotate(0deg) translateY(-40px); }
+        .petal:nth-child(2) { transform: rotate(30deg) translateY(-40px); }
+        .petal:nth-child(3) { transform: rotate(60deg) translateY(-40px); }
+        .petal:nth-child(4) { transform: rotate(90deg) translateY(-40px); }
+        .petal:nth-child(5) { transform: rotate(120deg) translateY(-40px); }
+        .petal:nth-child(6) { transform: rotate(150deg) translateY(-40px); }
+        .petal:nth-child(7) { transform: rotate(180deg) translateY(-40px); }
+        .petal:nth-child(8) { transform: rotate(210deg) translateY(-40px); }
+        .petal:nth-child(9) { transform: rotate(240deg) translateY(-40px); }
+        .petal:nth-child(10) { transform: rotate(270deg) translateY(-40px); }
+        .petal:nth-child(11) { transform: rotate(300deg) translateY(-40px); }
+        .petal:nth-child(12) { transform: rotate(330deg) translateY(-40px); }
 
-    /* Corazón final mejorado */
-    #heart {
-      font-size: clamp(2.5rem, 8vw, 5rem);
-      opacity: 0;
-      margin-top: 3vh;
-      animation: heartbeat 1.2s infinite, glow 1.2s infinite;
-      text-shadow: 0 0 5px var(--color-primary), 
-                   0 0 10px var(--color-primary), 
-                   0 0 15px var(--color-secondary);
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    
-    #heart:hover {
-      transform: scale(1.1);
-    }
+        /* Animaciones */
+        @keyframes growStem {
+            to { height: 180px; }
+        }
 
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      25% { transform: scale(1.2); }
-      50% { transform: scale(1); }
-      75% { transform: scale(1.2); }
-    }
+        @keyframes growFlower {
+            to { width: 120px; height: 120px; }
+        }
 
-    @keyframes glow {
-      0%, 100% { 
-        text-shadow: 0 0 5px var(--color-primary), 
-                     0 0 10px var(--color-primary), 
-                     0 0 15px var(--color-secondary); 
-      }
-      50% { 
-        text-shadow: 0 0 20px var(--color-primary), 
-                     0 0 40px var(--color-secondary), 
-                     0 0 60px var(--color-primary); 
-      }
-    }
-    
-    /* Footer mejorado */
-    footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      padding: 10px 0;
-      background: rgba(0, 0, 0, 0.7);
-      color: var(--color-text);
-      font-size: 0.8rem;
-      backdrop-filter: blur(5px);
-    }
-    
-    /* Responsive design */
-    @media (max-width: 768px) {
-      .nav-container {
-        flex-direction: column;
-      }
-      
-      .nav-links {
-        margin-top: 10px;
-      }
-      
-      .nav-links li {
-        margin: 0 10px;
-      }
-      
-      #main-message {
-        padding: 10px 15px;
-      }
-    }
-  </style>
+        @keyframes showPetals {
+            to { opacity: 1; }
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(3deg); }
+            50% { transform: rotate(-3deg); }
+            75% { transform: rotate(2deg); }
+        }
+
+        /* Corazón con latido natural */
+        #heart {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            opacity: 0;
+            margin-top: 3vh;
+            color: #ff6b6b;
+            animation: heartbeat 1.5s infinite;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        #heart:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.1); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.05); }
+            60% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Mensajes aleatorios */
+        #random-message {
+            font-size: clamp(1rem, 3vw, 1.6rem);
+            opacity: 0;
+            transition: opacity 2s;
+            padding: 10px 15px;
+            text-shadow: 2px 2px 5px black;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            max-width: 90%;
+            backdrop-filter: blur(5px);
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Estrellitas */
+        .star {
+            position: absolute;
+            top: -10px;
+            color: #FFD700;
+            font-size: 0.6rem;
+            animation: fall linear;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Barra de navegación -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="logo">Para Ti ❤️</div>
-      <ul class="nav-links">
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#galeria">Galería</a></li>
-        <li><a href="#mensajes">Mensajes</a></li>
-      </ul>
+    <div class="container">
+        <div id="main-message"></div>
+
+        <!-- Contenedor de flores mejorado -->
+        <div class="flower-container">
+            <!-- Girasol 1 (central) -->
+            <div class="sunflower">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <div class="center"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                </div>
+            </div>
+
+            <!-- Girasol 2 (izquierda) -->
+            <div class="sunflower">
+                <div class="stem" style="height: 160px;"></div>
+                <div class="flower-head" style="width: 100px; height: 100px;">
+                    <div class="center" style="width: 30px; height: 30px;"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                </div>
+            </div>
+
+            <!-- Girasol 3 (derecha) -->
+            <div class="sunflower">
+                <div class="stem" style="height: 160px;"></div>
+                <div class="flower-head" style="width: 100px; height: 100px;">
+                    <div class="center" style="width: 30px; height: 30px;"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                </div>
+            </div>
+
+            <!-- Girasoles adicionales -->
+            <div class="sunflower">
+                <div class="stem" style="height: 140px;"></div>
+                <div class="flower-head" style="width: 90px; height: 90px;">
+                    <div class="center" style="width: 25px; height: 25px;"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                </div>
+            </div>
+
+            <div class="sunflower">
+                <div class="stem" style="height: 140px;"></div>
+                <div class="flower-head" style="width: 90px; height: 90px;">
+                    <div class="center" style="width: 25px; height: 25px;"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Corazón -->
+        <div id="heart">❤️</div>
+
+        <div id="random-message"></div>
     </div>
-  </nav>
 
-  <div id="main-message"></div>
+    <!-- Sonido del corazón -->
+    <audio id="heartbeat-sound" preload="auto">
+        <source src="https://www.soundjay.com/human/heartbeat-01.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
 
-  <!-- Ramo en SVG con girasoles que se balancean -->
-  <svg id="flowers" viewBox="0 0 400 400">
-    <!-- Tallo -->
-    <path class="stem" d="M200 400 C200 300, 200 200, 200 100" />
+    <script>
+        // Texto principal animado
+        const text = "Las flores amarillas representan la felicidad.\nY tú eres la mía ❤️";
+        let i = 0;
+        const speed = 80;
+        const mainMessage = document.getElementById("main-message");
+        const heart = document.getElementById("heart");
+        const heartbeatSound = document.getElementById("heartbeat-sound");
 
-    <!-- Girasol 1 -->
-    <g class="sunflower">
-      <circle class="petal" cx="200" cy="100" r="70"/>
-      <circle class="center" cx="200" cy="100" r="30"/>
-    </g>
-
-    <!-- Girasol 2 -->
-    <g class="sunflower">
-      <circle class="petal" cx="140" cy="180" r="50"/>
-      <circle class="center" cx="140" cy="180" r="20"/>
-    </g>
-
-    <!-- Girasol 3 -->
-    <g class="sunflower">
-      <circle class="petal" cx="260" cy="180" r="50"/>
-      <circle class="center" cx="260" cy="180" r="20"/>
-    </g>
-  </svg>
-
-  <!-- Corazón -->
-  <div id="heart">❤️</div>
-
-  <div id="random-message"></div>
-
-  <!-- Sonido del corazón (con alternativa) -->
-  <audio id="heartbeat-sound" preload="auto">
-    <source src="https://www.soundjay.com/human/heartbeat-01.mp3" type="audio/mpeg">
-    Tu navegador no soporta el elemento de audio.
-  </audio>
-  
-  <footer>
-    Hecho con ❤️ para ti - 2023
-  </footer>
-
-  <script>
-    // Texto principal animado
-    const text = "Las flores amarillas representan la felicidad.\nY tú eres la mía ❤️";
-    let i = 0;
-    const speed = 80;
-    const mainMessage = document.getElementById("main-message");
-    const heart = document.getElementById("heart");
-    const heartbeatSound = document.getElementById("heartbeat-sound");
-
-    function typeWriter() {
-      if (i < text.length) {
-        mainMessage.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, speed);
-      } else {
-        // Mostrar corazón con sonido
-        setTimeout(() => {
-          heart.style.opacity = 1;
-          document.body.addEventListener("click", () => {
-            setInterval(() => {
-              heartbeatSound.currentTime = 0;
-              heartbeatSound.play().catch(e => console.log("Reproducción de audio prevenida:", e));
-            }, 1200);
-          }, { once: true });
-        }, 6000);
-        startRandomMessages();
-      }
-    }
-    
-    // Iniciar la animación cuando la página cargue
-    window.addEventListener('DOMContentLoaded', (event) => {
-      typeWriter();
-    });
-
-    // Estrellitas cayendo
-    function createStar() {
-      const star = document.createElement("div");
-      star.innerHTML = "✦";
-      star.classList.add("star");
-      star.style.left = Math.random() * window.innerWidth + "px";
-      star.style.fontSize = (Math.random() * 1.2 + 0.4) + "rem";
-      star.style.animationDuration = (2 + Math.random() * 3) + "s";
-      document.body.appendChild(star);
-      setTimeout(() => star.remove(), 5000);
-    }
-    setInterval(createStar, 250);
-
-    // Mensajes aleatorios
-    const messages = [
-      "Eres la mejor niña.",
-      "Siempre pienso en ti princesa.",
-      "Tú eres mi alegría.",
-      "Mi solecito.",
-      "Tu sonrisa ilumina mis días.",
-      "Eres mi razón para sonreír.",
-      "Cada día a tu lado es especial.",
-      "Eres el mejor regalo de la vida."
-    ];
-    const randomMessage = document.getElementById("random-message");
-
-    function startRandomMessages() {
-      setInterval(() => {
-        const msg = messages[Math.floor(Math.random() * messages.length)];
-        randomMessage.innerText = msg;
-        randomMessage.style.opacity = 1;
-        setTimeout(() => randomMessage.style.opacity = 0, 3000);
-      }, 5000);
-    }
-    
-    // Smooth scroll para navegación
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
+        function typeWriter() {
+            if (i < text.length) {
+                mainMessage.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                // Mostrar corazón con sonido
+                setTimeout(() => {
+                    heart.style.opacity = 1;
+                    document.body.addEventListener("click", () => {
+                        setInterval(() => {
+                            heartbeatSound.currentTime = 0;
+                            heartbeatSound.play().catch(e => console.log("Reproducción de audio prevenida:", e));
+                        }, 1500);
+                    }, { once: true });
+                }, 4000);
+                startRandomMessages();
+            }
+        }
+        
+        // Iniciar la animación cuando la página cargue
+        window.addEventListener('DOMContentLoaded', (event) => {
+            typeWriter();
         });
-      });
-    });
-  </script>
+
+        // Estrellitas cayendo
+        function createStar() {
+            const star = document.createElement("div");
+            star.innerHTML = "✦";
+            star.classList.add("star");
+            star.style.left = Math.random() * window.innerWidth + "px";
+            star.style.fontSize = (Math.random() * 1.2 + 0.4) + "rem";
+            star.style.animationDuration = (2 + Math.random() * 3) + "s";
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), 5000);
+        }
+        setInterval(createStar, 250);
+
+        // Mensajes aleatorios
+        const messages = [
+            "Eres la mejor niña.",
+            "Siempre pienso en ti princesa.",
+            "Tú eres mi alegría.",
+            "Mi solecito.",
+            "Tu sonrisa ilumina mis días.",
+            "Eres mi razón para sonreír.",
+            "Cada día a tu lado es especial.",
+            "Eres el mejor regalo de la vida."
+        ];
+        const randomMessage = document.getElementById("random-message");
+
+        function startRandomMessages() {
+            setInterval(() => {
+                const msg = messages[Math.floor(Math.random() * messages.length)];
+                randomMessage.innerText = msg;
+                randomMessage.style.opacity = 1;
+                setTimeout(() => randomMessage.style.opacity = 0, 3000);
+            }, 5000);
+        }
+    </script>
 </body>
 </html>
