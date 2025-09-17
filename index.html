@@ -94,29 +94,28 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 60vh;
   display:flex;
   justify-content:center;
   align-items:flex-end;
+  gap: 2vmin; /* separación entre girasoles */
   transform: scale(0.7);
   z-index:3;
   pointer-events:none;
 }
 
 .flower {
-  position: absolute;
-  bottom: 15vmin;
+  position: relative;
   transform-origin: bottom center;
 }
 
-/* Posiciones más juntas */
-.flower--1 { left:35%; animation: moving-flower-1 4s linear infinite; }
-.flower--2 { left:40%; transform: rotate(20deg); animation: moving-flower-2 4s linear infinite; }
-.flower--3 { left:45%; transform: rotate(-15deg); animation: moving-flower-3 4s linear infinite; }
-.flower--4 { left:50%; transform: rotate(10deg); animation: moving-flower-4 3.5s linear infinite; }
-.flower--5 { left:55%; transform: rotate(-25deg); animation: moving-flower-5 4.5s linear infinite; }
-.flower--6 { left:60%; transform: rotate(12deg); animation: moving-flower-4 4s linear infinite; }
-.flower--7 { left:65%; transform: rotate(-18deg); animation: moving-flower-3 4.2s linear infinite; }
+/* Animación de movimiento para cada flor */
+.flower:nth-child(1) { animation: moving-flower-1 4s linear infinite; }
+.flower:nth-child(2) { animation: moving-flower-2 4s linear infinite; }
+.flower:nth-child(3) { animation: moving-flower-3 4s linear infinite; }
+.flower:nth-child(4) { animation: moving-flower-4 4s linear infinite; }
+.flower:nth-child(5) { animation: moving-flower-5 4s linear infinite; }
+.flower:nth-child(6) { animation: moving-flower-1 4s linear infinite; }
+.flower:nth-child(7) { animation: moving-flower-2 4s linear infinite; }
 
 /* Pétalos */
 .flower__leafs {
@@ -155,8 +154,8 @@ body {
   height: 55vmin;
   width: 2vmin;
   background: linear-gradient(to top, transparent 10%, #2d5016, #4a7c23, #6b8e23);
-  animation: grow-flower-tree 4s backwards;
   position: relative;
+  animation: grow-flower-tree 4s backwards;
 }
 
 /* Hojas del tallo */
@@ -189,10 +188,10 @@ body {
   0% { transform: scale(0); }
 }
 @keyframes moving-flower-1 { 0%,100%{transform:rotate(2deg);} 50%{transform:rotate(-2deg);} }
-@keyframes moving-flower-2 { 0%,100%{transform:rotate(18deg);} 50%{transform:rotate(14deg);} }
-@keyframes moving-flower-3 { 0%,100%{transform:rotate(-18deg);} 50%{transform:rotate(-20deg) rotateY(-10deg);} }
-@keyframes moving-flower-4 { 0%,100%{transform:rotate(9deg);} 50%{transform:rotate(12deg) rotateY(9deg);} }
-@keyframes moving-flower-5 { 0%,100%{transform:rotate(-5deg);} 50%{transform:rotate(-11deg) rotateY(5deg);} }
+@keyframes moving-flower-2 { 0%,100%{transform:rotate(3deg);} 50%{transform:rotate(-3deg);} }
+@keyframes moving-flower-3 { 0%,100%{transform:rotate(-2deg);} 50%{transform:rotate(2deg);} }
+@keyframes moving-flower-4 { 0%,100%{transform:rotate(1deg);} 50%{transform:rotate(-1deg);} }
+@keyframes moving-flower-5 { 0%,100%{transform:rotate(-1deg);} 50%{transform:rotate(1deg);} }
 </style>
 </head>
 <body>
@@ -200,50 +199,18 @@ body {
   <div id="main-message"></div>
 </div>
 
-<!-- 7 Girasoles juntos -->
+<!-- 7 Girasoles en fila -->
 <div class="flowers">
-  <!-- Reutilizamos mismo bloque para cada flor -->
-  <div class="flower flower--1"><div class="flower__leafs">
-    <div class="flower__white-circle"></div>
-    <!-- 12 pétalos -->
-    <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg);"></div>
-    <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg);"></div>
-    <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg);"></div>
-    <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg);"></div>
-    <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg);"></div>
-    <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg);"></div>
-    <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg);"></div>
-    <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg);"></div>
-    <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg);"></div>
-    <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg);"></div>
-    <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg);"></div>
-    <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg);"></div>
-  </div><div class="flower__line"></div></div>
-
-  <!-- Duplicar fácilmente para flor--2 a flor--7 -->
-  <div class="flower flower--2"><div class="flower__leafs"><div class="flower__white-circle"></div>
-    ${[...Array(12)].map((_,i)=>`<div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(${i*30}deg);"></div>`).join("")}
-  </div><div class="flower__line"></div></div>
-
-  <div class="flower flower--3"><div class="flower__leafs"><div class="flower__white-circle"></div>
-    ${[...Array(12)].map((_,i)=>`<div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(${i*30}deg);"></div>`).join("")}
-  </div><div class="flower__line"></div></div>
-
-  <div class="flower flower--4"><div class="flower__leafs"><div class="flower__white-circle"></div>
-    ${[...Array(12)].map((_,i)=>`<div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(${i*30}deg);"></div>`).join("")}
-  </div><div class="flower__line"></div></div>
-
-  <div class="flower flower--5"><div class="flower__leafs"><div class="flower__white-circle"></div>
-    ${[...Array(12)].map((_,i)=>`<div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(${i*30}deg);"></div>`).join("")}
-  </div><div class="flower__line"></div></div>
-
-  <div class="flower flower--6"><div class="flower__leafs"><div class="flower__white-circle"></div>
-    ${[...Array(12)].map((_,i)=>`<div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(${i*30}deg);"></div>`).join("")}
-  </div><div class="flower__line"></div></div>
-
-  <div class="flower flower--7"><div class="flower__leafs"><div class="flower__white-circle"></div>
-    ${[...Array(12)].map((_,i)=>`<div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(${i*30}deg);"></div>`).join("")}
-  </div><div class="flower__line"></div></div>
+  <!-- Cada girasol con pétalos, centro y tallo -->
+  ${[...Array(7)].map((_, idx) => `
+    <div class="flower">
+      <div class="flower__leafs">
+        <div class="flower__white-circle"></div>
+        ${[...Array(12)].map((__, i) => `<div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(${i*30}deg);"></div>`).join('')}
+      </div>
+      <div class="flower__line"></div>
+    </div>
+  `).join('')}
 </div>
 
 <script>
