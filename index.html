@@ -20,7 +20,15 @@ body {
     padding:15px;
     color:#fff;
 }
-.container {width:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:10px; margin-top:20px;}
+.container {
+    width:100%; 
+    display:flex; 
+    flex-direction:column; 
+    align-items:center; 
+    justify-content:flex-start; 
+    padding:10px; 
+    margin-top:20px;
+}
 #main-message {
     font-size:clamp(1.2rem,5vw,1.8rem);
     white-space:pre-wrap;
@@ -37,69 +45,105 @@ body {
     text-align:center;
     max-width:95%;
 }
-@keyframes blink {50% {border-color:transparent;}}
-
+@keyframes blink {
+    50% {border-color:transparent;}
+}
 .flower-container {
-    position: relative;
-    width: 100%;
-    height: 40vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    position:relative;
+    width:100%;
+    height:40vh;
+    max-height:300px;
+    min-height:250px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
 }
-
 .sunflower {
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transform-origin: bottom center;
-    animation: sway 6s ease-in-out infinite;
+    position:absolute;
+    bottom:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    transform-origin:bottom center;
+    animation:sway 6s ease-in-out infinite;
+    z-index: 1;
 }
-
+/* Posicionamiento corregido de los girasoles */
+.sunflower:nth-child(1) {
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0s;
+    z-index: 3;
+}
+.sunflower:nth-child(2) {
+    left: 70%;
+    animation-delay: 1.5s;
+    z-index: 2;
+}
+.sunflower:nth-child(3) {
+    left: 30%;
+    animation-delay: 2s;
+    z-index: 2;
+}
 .stem {
-    width: 6px;
-    background: linear-gradient(to top,#2e8b57,#3cb371,#2e8b57);
-    border-radius: 3px;
-    height: 150px;
-    animation: growStem 3s forwards;
-    position: relative;
+    width:6px;
+    background:linear-gradient(to top, #2e8b57, #3cb371, #2e8b57);
+    border-radius:3px;
+    height:0;
+    animation:growStem 3s forwards;
 }
-
 .flower-head {
-    position: relative;
-    width: 80px;
-    height: 80px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position:relative;
+    width:80px;
+    height:80px;
+    margin-bottom:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
     animation: growFlower 2s forwards;
+    transform-origin: bottom center;
 }
-
 .flower-center {
-    position: absolute;
+    position:absolute;
     width:30px;
     height:30px;
-    background:radial-gradient(circle,#654321 0%,#8B4513 70%,#654321 100%);
+    background:radial-gradient(circle, #654321 0%, #8B4513 70%, #654321 100%);
     border-radius:50%;
     z-index:2;
     display:flex;
     justify-content:center;
     align-items:center;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 .center-detail {
-    width:80%; 
-    height:80%; 
-    background:radial-gradient(circle,#8B4513 0%,#654321 70%); 
-    border-radius:50%; 
+    width:80%;
+    height:80%;
+    background:radial-gradient(circle, #8B4513 0%, #654321 70%);
+    border-radius:50%;
     opacity:0.8;
+    position: relative;
+    overflow: hidden;
 }
-
+.center-detail::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-radial-gradient(
+        circle at center,
+        #a52a2a 0px,
+        #a52a2a 1px,
+        #8b4513 1px,
+        #8b4513 2px
+    );
+    opacity: 0.6;
+    border-radius: 50%;
+}
 .petals {
-    position:absolute; 
-    width:100%; 
+    position:absolute;
+    width:100%;
     height:100%;
 }
 .petal {
@@ -108,14 +152,16 @@ body {
     top:50%;
     width:20px;
     height:50px;
-    background:linear-gradient(to bottom,#FFD700,#FFA500);
-    border-radius:50%;
+    background:linear-gradient(to bottom, #FFD700, #FFA500, #FF8C00);
+    border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
     transform-origin:bottom center;
     opacity:0;
     animation:showPetals 1s forwards;
     animation-delay:3s;
     box-shadow:0 0 4px rgba(0,0,0,0.3);
+    z-index: 1;
 }
+/* Posicionamiento de pétalos */
 .petal:nth-child(1){transform:translate(-50%,-50%) rotate(0deg) translateY(-35px);}
 .petal:nth-child(2){transform:translate(-50%,-50%) rotate(30deg) translateY(-35px);}
 .petal:nth-child(3){transform:translate(-50%,-50%) rotate(60deg) translateY(-35px);}
@@ -129,16 +175,48 @@ body {
 .petal:nth-child(11){transform:translate(-50%,-50%) rotate(300deg) translateY(-35px);}
 .petal:nth-child(12){transform:translate(-50%,-50%) rotate(330deg) translateY(-35px);}
 
+/* Hojas posicionadas correctamente */
 .leaf {
-    position: absolute;
-    width: 25px;
-    height: 16px;
-    background: linear-gradient(to right,#2e8b57,#3cb371);
-    border-radius: 50% 0 50% 50%;
-    transform: rotate(45deg);
-    opacity:0.8;
-    top: 50px;
-    left: -15px;
+    position:absolute;
+    width:25px;
+    height:16px;
+    background:linear-gradient(to right, #2e8b57, #3cb371);
+    border-radius:50% 0 50% 50%;
+    transform:rotate(45deg);
+    opacity:0;
+    animation:showLeaf 1s forwards;
+    animation-delay:3.5s;
+    z-index: 0;
+}
+/* Hojas para el girasol central */
+.sunflower:nth-child(1) .leaf:nth-child(1) {
+    bottom: 40%;
+    left: calc(50% - 5px);
+}
+.sunflower:nth-child(1) .leaf:nth-child(2) {
+    bottom: 60%;
+    left: calc(50% + 8px);
+    transform: rotate(-20deg);
+}
+/* Hojas para el girasol derecho */
+.sunflower:nth-child(2) .leaf:nth-child(1) {
+    bottom: 35%;
+    left: calc(50% - 8px);
+}
+.sunflower:nth-child(2) .leaf:nth-child(2) {
+    bottom: 55%;
+    left: calc(50% + 5px);
+    transform: rotate(-25deg);
+}
+/* Hojas para el girasol izquierdo */
+.sunflower:nth-child(3) .leaf:nth-child(1) {
+    bottom: 40%;
+    left: calc(50% - 3px);
+}
+.sunflower:nth-child(3) .leaf:nth-child(2) {
+    bottom: 65%;
+    left: calc(50% + 10px);
+    transform: rotate(-15deg);
 }
 
 .floating-message {
@@ -155,44 +233,48 @@ body {
     z-index:5;
     max-width:40%;
 }
-
 .star {
-    position:absolute; 
-    top:-10px; 
-    color:#FFD700; 
-    font-size:0.6rem; 
-    animation:fall linear; 
+    position:absolute;
+    top:-10px;
+    color:#FFD700;
+    font-size:0.6rem;
+    animation:fall linear;
     z-index:1;
 }
-
-@keyframes growStem {from{height:0;}to{height:150px;}}
-@keyframes growFlower {from{transform:scaleY(0);}to{transform:scaleY(1);}}
-@keyframes showPetals {to{opacity:1;}}
-@keyframes sway {0%,100%{transform:rotate(0deg);}25%{transform:rotate(3deg);}50%{transform:rotate(-3deg);}75%{transform:rotate(2deg);}}
-@keyframes fall {to{transform:translateY(110vh) rotate(360deg);opacity:0;}}
+@keyframes growStem {
+    from {height:0;}
+    to {height:150px;}
+}
+@keyframes growFlower {
+    from {transform: scale(0);}
+    to {transform: scale(1);}
+}
+@keyframes showPetals {
+    to {opacity:1;}
+}
+@keyframes showLeaf {
+    to {opacity:0.8;}
+}
+@keyframes sway {
+    0%,100% {transform:rotate(0deg);}
+    25% {transform:rotate(3deg);}
+    50% {transform:rotate(-3deg);}
+    75% {transform:rotate(2deg);}
+}
+@keyframes fall {
+    to {
+        transform:translateY(110vh) rotate(360deg);
+        opacity:0;
+    }
+}
 </style>
 </head>
 <body>
 <div class="container">
     <div id="main-message"></div>
     <div class="flower-container">
-        <!-- Girasol izquierdo -->
-        <div class="sunflower" style="left:25%;">
-            <div class="stem"></div>
-            <div class="flower-head">
-                <div class="flower-center"><div class="center-detail"></div></div>
-                <div class="petals">
-                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-                </div>
-            </div>
-            <div class="leaf"></div>
-            <div class="leaf" style="left:15px; transform: rotate(-45deg);"></div>
-        </div>
         <!-- Girasol central -->
-        <div class="sunflower" style="left:50%; transform:translateX(-50%);">
+        <div class="sunflower">
             <div class="stem"></div>
             <div class="flower-head">
                 <div class="flower-center"><div class="center-detail"></div></div>
@@ -203,14 +285,13 @@ body {
                     <div class="petal"></div><div class="petal"></div><div class="petal"></div>
                 </div>
             </div>
-            <div class="leaf"></div>
-            <div class="leaf" style="left:15px; transform: rotate(-45deg);"></div>
+            <div class="leaf"></div><div class="leaf"></div>
         </div>
         <!-- Girasol derecho -->
-        <div class="sunflower" style="left:75%;">
-            <div class="stem"></div>
-            <div class="flower-head">
-                <div class="flower-center"><div class="center-detail"></div></div>
+        <div class="sunflower">
+            <div class="stem" style="height:130px;"></div>
+            <div class="flower-head" style="width:70px;height:70px;">
+                <div class="flower-center" style="width:25px;height:25px;"><div class="center-detail"></div></div>
                 <div class="petals">
                     <div class="petal"></div><div class="petal"></div><div class="petal"></div>
                     <div class="petal"></div><div class="petal"></div><div class="petal"></div>
@@ -218,12 +299,24 @@ body {
                     <div class="petal"></div><div class="petal"></div><div class="petal"></div>
                 </div>
             </div>
-            <div class="leaf"></div>
-            <div class="leaf" style="left:15px; transform: rotate(-45deg);"></div>
+            <div class="leaf"></div><div class="leaf"></div>
+        </div>
+        <!-- Girasol izquierdo -->
+        <div class="sunflower">
+            <div class="stem" style="height:140px;"></div>
+            <div class="flower-head" style="width:75px;height:75px;">
+                <div class="flower-center" style="width:27px;height:27px;"><div class="center-detail"></div></div>
+                <div class="petals">
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                </div>
+            </div>
+            <div class="leaf"></div><div class="leaf"></div>
         </div>
     </div>
 </div>
-
 <script>
 // Texto principal animado
 const text = "Las flores amarillas representan la felicidad.\nY tú eres la mía ❤️";
@@ -250,7 +343,7 @@ function createStar(){
 }
 setInterval(createStar,250);
 
-// Mensajes flotantes
+// Mensajes flotantes sin tapar flores ni texto
 const messages=[
     "Eres la mejor niña.","Siempre pienso en ti princesa.","Tú eres mi alegría.",
     "Mi solecito.","Tu sonrisa ilumina mis días.","Eres mi razón para sonreír."
@@ -261,6 +354,7 @@ function startFloatingMessages(){
         const div=document.createElement("div");
         div.classList.add("floating-message");
         div.innerText=msg;
+        // Limitar la posición: top debajo del mensaje y girasoles (aprox 180px)
         div.style.top=(Math.random()*150 + 200)+"px"; 
         div.style.left=Math.random()*window.innerWidth*0.6+"px";
         document.body.appendChild(div);
