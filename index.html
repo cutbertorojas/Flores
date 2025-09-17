@@ -6,11 +6,6 @@
 <title>Para Ti ❤️</title>
 <style>
 * {margin:0; padding:0; box-sizing:border-box;}
-:root {
-  --fl-speed: 0.8s;
-  --speed-leaf: 2s;
-}
-
 body {
   min-height:100vh;
   display:flex;
@@ -25,8 +20,6 @@ body {
   color:#fff;
   padding:15px;
 }
-
-/* Texto principal */
 .container {
   width:100%;
   display:flex;
@@ -37,7 +30,6 @@ body {
   margin-top:20px;
   z-index:10;
 }
-
 #main-message {
   font-size:clamp(1.2rem,5vw,1.8rem);
   white-space:pre-wrap;
@@ -55,8 +47,6 @@ body {
   max-width:95%;
 }
 @keyframes blink {50% {border-color:transparent;}}
-
-/* Mensajes flotantes */
 .floating-message {
   position:absolute;
   font-size:clamp(0.9rem,4vw,1.2rem);
@@ -71,8 +61,6 @@ body {
   z-index:5;
   max-width:40%;
 }
-
-/* Estrellas cayendo diagonal */
 .star {
   position:absolute; 
   top:-10px; 
@@ -82,40 +70,25 @@ body {
   z-index:1;
 }
 @keyframes fall {to{transform:translateY(110vh) translateX(50vw) rotate(360deg);opacity:0;}}
-
-/* ============================= */
-/* Girasoles */
 .flowers {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 60vh;
   display:flex;
-  justify-content:center;
+  justify-content:space-around;
   align-items:flex-end;
-  gap:5vmin;  /* separación aumentada */
+  gap:5vmin;
   transform: scale(0.7);
   z-index:3;
   pointer-events:none;
 }
-
-.flower {
-  position: relative;
-  transform-origin: bottom center;
-}
-
-/* Animaciones suaves */
+.flower {position: relative; transform-origin: bottom center;}
 .flower--1 { animation: moving-flower-1 4s linear infinite; }
 .flower--2 { animation: moving-flower-2 4s linear infinite; }
 .flower--3 { animation: moving-flower-3 4s linear infinite; }
 .flower--4 { animation: moving-flower-4 3.5s linear infinite; }
 .flower--5 { animation: moving-flower-5 4.5s linear infinite; }
-
-/* Pétalos */
-.flower__leafs {
-  position: relative;
-  animation: blooming-flower 2s backwards;
-}
+.flower__leafs { position: relative; animation: blooming-flower 2s backwards; }
 .flower__leaf {
   position: absolute;
   bottom: 0;
@@ -126,11 +99,8 @@ body {
   background: linear-gradient(to top, #ff8c00, #ffd700, #ffff00);
   transform-origin: bottom center;
   opacity: 0.95;
-  box-shadow: inset 0 0 1vmin rgba(255,255,255,0.7), 
-              0 0 3vmin rgba(255,215,0,0.4);
+  box-shadow: inset 0 0 1vmin rgba(255,255,255,0.7), 0 0 3vmin rgba(255,215,0,0.4);
 }
-
-/* Centro marrón */
 .flower__white-circle {
   position: absolute;
   left: -4vmin;
@@ -139,16 +109,12 @@ body {
   height: 10vmin;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #654321, #8b4513, #2f1b14);
-  box-shadow: inset 0 0 2vmin rgba(0, 0, 0, 0.8),
-              0 0 1vmin rgba(139, 69, 19, 0.6);
+  box-shadow: inset 0 0 2vmin rgba(0, 0, 0, 0.8), 0 0 1vmin rgba(139, 69, 19, 0.6);
 }
-
-/* Tallo con hojas */
 .flower__line {
   height: 55vmin;
   width: 2vmin;
   background: linear-gradient(to top, transparent 10%, #2d5016, #4a7c23, #6b8e23);
-  animation: grow-flower-tree 4s backwards;
   position: relative;
 }
 .flower__line::before,
@@ -160,20 +126,16 @@ body {
   background: radial-gradient(circle at 30% 30%, #3b7a1e, #2d5016);
   border-radius: 50% 50% 0 50%;
   top: 40%;
-  transform-origin: center;
-  box-shadow: inset 0 0 0.5vmin rgba(0,0,0,0.5);
 }
 .flower__line::before { left: -9vmin; transform: rotate(-30deg); }
 .flower__line::after { right: -9vmin; transform: rotate(30deg) scaleX(-1); }
-
-/* Animaciones */
-@keyframes grow-flower-tree { 0% { height: 0; border-radius: 1vmin; } }
-@keyframes blooming-flower { 0% { transform: scale(0); } }
-@keyframes moving-flower-1 { 0%,100%{transform:rotate(2deg);} 50%{transform:rotate(-2deg);} }
-@keyframes moving-flower-2 { 0%,100%{transform:rotate(3deg);} 50%{transform:rotate(-3deg);} }
-@keyframes moving-flower-3 { 0%,100%{transform:rotate(-2deg);} 50%{transform:rotate(2deg);} }
-@keyframes moving-flower-4 { 0%,100%{transform:rotate(1deg);} 50%{transform:rotate(-1deg);} }
-@keyframes moving-flower-5 { 0%,100%{transform:rotate(-1deg);} 50%{transform:rotate(1deg);} }
+@keyframes grow-flower-tree {0% {height:0; border-radius:1vmin;}}
+@keyframes blooming-flower {0% {transform: scale(0);}}
+@keyframes moving-flower-1 {0%,100%{transform:rotate(2deg);}50%{transform:rotate(-2deg);}}
+@keyframes moving-flower-2 {0%,100%{transform:rotate(3deg);}50%{transform:rotate(-3deg);}}
+@keyframes moving-flower-3 {0%,100%{transform:rotate(-2deg);}50%{transform:rotate(2deg);}}
+@keyframes moving-flower-4 {0%,100%{transform:rotate(1deg);}50%{transform:rotate(-1deg);}}
+@keyframes moving-flower-5 {0%,100%{transform:rotate(-1deg);}50%{transform:rotate(1deg);}}
 </style>
 </head>
 <body>
@@ -182,45 +144,102 @@ body {
   <div id="main-message"></div>
 </div>
 
-<!-- Girasoles -->
 <div class="flowers">
   <!-- Flor 1 -->
   <div class="flower flower--1">
     <div class="flower__leafs">
       <div class="flower__white-circle"></div>
-      ${[...Array(12)].map((_, i) => `<div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(${i*30}deg);"></div>`).join('')}
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg)"></div>
     </div>
     <div class="flower__line"></div>
   </div>
+
   <!-- Flor 2 -->
   <div class="flower flower--2">
     <div class="flower__leafs">
       <div class="flower__white-circle"></div>
-      ${[...Array(12)].map((_, i) => `<div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(${i*30}deg);"></div>`).join('')}
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg)"></div>
     </div>
     <div class="flower__line"></div>
   </div>
-  <!-- Flor 3 -->
+<!-- Flor 3 -->
   <div class="flower flower--3">
     <div class="flower__leafs">
       <div class="flower__white-circle"></div>
-      ${[...Array(12)].map((_, i) => `<div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(${i*30}deg);"></div>`).join('')}
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg)"></div>
     </div>
     <div class="flower__line"></div>
   </div>
+
   <!-- Flor 4 -->
   <div class="flower flower--4">
     <div class="flower__leafs">
       <div class="flower__white-circle"></div>
-      ${[...Array(12)].map((_, i) => `<div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(${i*30}deg);"></div>`).join('')}
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg)"></div>
     </div>
     <div class="flower__line"></div>
   </div>
+
   <!-- Flor 5 -->
   <div class="flower flower--5">
     <div class="flower__leafs">
       <div class="flower__white-circle"></div>
-      ${[...Array(12)].map((_, i) => `<div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(${i*30}deg);"></div>`).join('')}
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg)"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg)"></div>
     </div>
     <div class="flower__line"></div>
   </div>
@@ -240,19 +259,21 @@ function typeWriter(){
 }
 window.addEventListener('DOMContentLoaded',()=>{typeWriter();});
 
-// Estrellitas cayendo
+// Estrellitas cayendo en diagonal
 function createStar(){
   const star=document.createElement("div");
   star.innerHTML="✦"; star.classList.add("star");
-  star.style.left=Math.random()*window.innerWidth+"px";
+  const startX = Math.random()*window.innerWidth;
+  star.style.left=startX+"px";
   star.style.fontSize=(Math.random()*1.2+0.4)+"rem";
   star.style.animationDuration=(2+Math.random()*3)+"s";
+  star.style.transform=`translateX(0px)`;
   document.body.appendChild(star);
   setTimeout(()=>star.remove(),5000);
 }
 setInterval(createStar,250);
 
-// Mensajes flotantes
+// Mensajes flotantes aleatorios
 const messages=[
   "Eres la mejor niña.","Siempre pienso en ti princesa.","Tú eres mi alegría.",
   "Mi solecito.","Tu sonrisa ilumina mis días.","Eres mi razón para sonreír."
