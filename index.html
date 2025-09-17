@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,95 +6,110 @@
 <title>Para Ti ❤️</title>
 <style>
 * {margin:0; padding:0; box-sizing:border-box;}
-body {
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:flex-start;
-    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
-    url('https://images.unsplash.com/photo-1501973801540-537f08ccae7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-align:center;
-    overflow:hidden;
-    padding:15px;
-    color:#fff;
-}
-
-.container {
-    margin-top:20px;
-    z-index:3;
-}
-
-#main-message {
-    font-size:clamp(1.2rem,5vw,1.8rem);
-    white-space:pre-wrap;
-    border-right:2px solid white;
-    width:fit-content;
-    animation:blink 0.8s infinite;
-    margin-bottom:20px;
-    background:rgba(0,0,0,0.4);
-    padding:12px 15px;
-    border-radius:12px;
-    text-shadow:2px 2px 6px rgba(0,0,0,0.9);
-    line-height:1.5;
-    backdrop-filter:blur(5px);
-    text-align:center;
-    max-width:95%;
-}
-@keyframes blink {50% {border-color:transparent;}}
-
-.floating-message {
-    position:absolute;
-    font-size:clamp(0.9rem,4vw,1.2rem);
-    opacity:0;
-    padding:8px 12px;
-    text-shadow:2px 2px 5px black;
-    background:rgba(0,0,0,0.5);
-    border-radius:8px;
-    backdrop-filter:blur(5px);
-    text-align:center;
-    transition:opacity 1.5s ease-in-out;
-    z-index:5;
-    max-width:40%;
-}
-
-.star {
-    position:absolute; 
-    top:-10px; 
-    color:#FFD700; 
-    font-size:0.6rem; 
-    animation:fall linear; 
-    z-index:1;
-}
-@keyframes fall {to{transform:translateY(110vh) rotate(360deg);opacity:0;}}
-
-/* 🌻 Girasoles */
 :root {
   --fl-speed: 0.8s;
   --speed-leaf: 2s;
 }
 
+body {
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
+    url('https://images.unsplash.com/photo-1501973801540-537f08ccae7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align:center;
+  overflow:hidden;
+  color:#fff;
+  padding:15px;
+}
+
+/* Texto principal */
+.container {
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding:10px;
+  margin-top:20px;
+  z-index:10;
+}
+
+#main-message {
+  font-size:clamp(1.2rem,5vw,1.8rem);
+  white-space:pre-wrap;
+  border-right:2px solid white;
+  width:fit-content;
+  animation:blink 0.8s infinite;
+  margin-bottom:20px;
+  background:rgba(0,0,0,0.4);
+  padding:12px 15px;
+  border-radius:12px;
+  text-shadow:2px 2px 6px rgba(0,0,0,0.9);
+  line-height:1.5;
+  backdrop-filter:blur(5px);
+  text-align:center;
+  max-width:95%;
+}
+@keyframes blink {50% {border-color:transparent;}}
+
+/* Mensajes flotantes */
+.floating-message {
+  position:absolute;
+  font-size:clamp(0.9rem,4vw,1.2rem);
+  opacity:0;
+  padding:8px 12px;
+  text-shadow:2px 2px 5px black;
+  background:rgba(0,0,0,0.5);
+  border-radius:8px;
+  backdrop-filter:blur(5px);
+  text-align:center;
+  transition:opacity 1.5s ease-in-out;
+  z-index:5;
+  max-width:40%;
+}
+
+/* Estrellas */
+.star {
+  position:absolute; 
+  top:-10px; 
+  color:#FFD700; 
+  font-size:0.6rem; 
+  animation:fall linear; 
+  z-index:1;
+}
+@keyframes fall {to{transform:translateY(110vh) rotate(360deg);opacity:0;}}
+
+/* ============================= */
+/* Girasoles */
 .flowers {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60vh;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
   transform: scale(0.7);
-  z-index: 2;
-  margin-top:auto;
-  margin-bottom:5vh;
+  z-index:3;
+  pointer-events:none;
 }
 
 .flower {
   position: absolute;
-  bottom: 0;
+  bottom: 15vmin;
   transform-origin: bottom center;
 }
 
-/* Movimiento suave */
-.flower--1 { animation: moving-flower-1 4s linear infinite; left:0; }
-.flower--2 { left: 50%; transform: rotate(20deg); animation: moving-flower-2 4s linear infinite; }
-.flower--3 { left: 30%; transform: rotate(-15deg); animation: moving-flower-3 4s linear infinite; }
-.flower--4 { left: -25%; transform: rotate(10deg); animation: moving-flower-4 3.5s linear infinite; }
-.flower--5 { left: 75%; transform: rotate(-25deg); animation: moving-flower-5 4.5s linear infinite; }
+/* Flor que se mueve suavemente */
+.flower--1 { left:10%; animation: moving-flower-1 4s linear infinite; }
+.flower--2 { left:30%; transform: rotate(20deg); animation: moving-flower-2 4s linear infinite; }
+.flower--3 { left:50%; transform: rotate(-15deg); animation: moving-flower-3 4s linear infinite; }
+.flower--4 { left:70%; transform: rotate(10deg); animation: moving-flower-4 3.5s linear infinite; }
+.flower--5 { left:85%; transform: rotate(-25deg); animation: moving-flower-5 4.5s linear infinite; }
 
 /* Pétalos */
 .flower__leafs {
@@ -139,13 +152,17 @@ body {
 }
 
 /* Animaciones */
-@keyframes grow-flower-tree {0% { height: 0; border-radius: 1vmin; }}
-@keyframes blooming-flower {0% { transform: scale(0); }}
-@keyframes moving-flower-1 {0%,100%{transform:rotate(2deg);} 50%{transform:rotate(-2deg);} }
-@keyframes moving-flower-2 {0%,100%{transform:rotate(18deg);} 50%{transform:rotate(14deg);} }
-@keyframes moving-flower-3 {0%,100%{transform:rotate(-18deg);} 50%{transform:rotate(-20deg) rotateY(-10deg);} }
-@keyframes moving-flower-4 {0%,100%{transform:rotate(9deg);} 50%{transform:rotate(12deg) rotateY(9deg);} }
-@keyframes moving-flower-5 {0%,100%{transform:rotate(-5deg);} 50%{transform:rotate(-11deg) rotateY(5deg);} }
+@keyframes grow-flower-tree {
+  0% { height: 0; border-radius: 1vmin; }
+}
+@keyframes blooming-flower {
+  0% { transform: scale(0); }
+}
+@keyframes moving-flower-1 { 0%,100%{transform:rotate(2deg);} 50%{transform:rotate(-2deg);} }
+@keyframes moving-flower-2 { 0%,100%{transform:rotate(18deg);} 50%{transform:rotate(14deg);} }
+@keyframes moving-flower-3 { 0%,100%{transform:rotate(-18deg);} 50%{transform:rotate(-20deg) rotateY(-10deg);} }
+@keyframes moving-flower-4 { 0%,100%{transform:rotate(9deg);} 50%{transform:rotate(12deg) rotateY(9deg);} }
+@keyframes moving-flower-5 { 0%,100%{transform:rotate(-5deg);} 50%{transform:rotate(-11deg) rotateY(5deg);} }
 </style>
 </head>
 <body>
@@ -153,11 +170,12 @@ body {
   <div id="main-message"></div>
 </div>
 
-<!-- 🌻 Girasoles -->
+<!-- Girasoles -->
 <div class="flowers">
   <!-- Flor 1 -->
   <div class="flower flower--1">
     <div class="flower__leafs">
+      <!-- pétalos en círculo -->
       <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg);"></div>
       <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg);"></div>
       <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg);"></div>
@@ -175,7 +193,89 @@ body {
     <div class="flower__line"></div>
   </div>
 
-  <!-- Puedes duplicar esta estructura para flor--2, flor--3, etc. -->
+  <!-- Flor 2 -->
+  <div class="flower flower--2">
+    <div class="flower__leafs">
+      <!-- pétalos -->
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg);"></div>
+      <div class="flower__white-circle"></div>
+    </div>
+    <div class="flower__line"></div>
+  </div>
+
+  <!-- Flor 3 -->
+  <div class="flower flower--3">
+    <div class="flower__leafs">
+      <!-- pétalos -->
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg);"></div>
+      <div class="flower__white-circle"></div>
+    </div>
+    <div class="flower__line"></div>
+  </div>
+
+  <!-- Flor 4 -->
+  <div class="flower flower--4">
+    <div class="flower__leafs">
+      <!-- pétalos -->
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg);"></div>
+      <div class="flower__white-circle"></div>
+    </div>
+    <div class="flower__line"></div>
+  </div>
+
+  <!-- Flor 5 -->
+  <div class="flower flower--5">
+    <div class="flower__leafs">
+      <!-- pétalos -->
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg);"></div>
+      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg);"></div>
+      <div class="flower__white-circle"></div>
+    </div>
+    <div class="flower__line"></div>
+  </div>
 </div>
 
 <script>
@@ -184,46 +284,46 @@ const text = "Las flores amarillas representan la felicidad.\nY tú eres la mía
 let i=0;
 const mainMessage = document.getElementById("main-message");
 function typeWriter(){
-    if(i<text.length){
-        mainMessage.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter,80);
-    }
+  if(i<text.length){
+    mainMessage.innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter,80);
+  }
 }
 window.addEventListener('DOMContentLoaded',()=>{typeWriter();});
 
 // Estrellitas cayendo
 function createStar(){
-    const star=document.createElement("div");
-    star.innerHTML="✦"; star.classList.add("star");
-    star.style.left=Math.random()*window.innerWidth+"px";
-    star.style.fontSize=(Math.random()*1.2+0.4)+"rem";
-    star.style.animationDuration=(2+Math.random()*3)+"s";
-    document.body.appendChild(star);
-    setTimeout(()=>star.remove(),5000);
+  const star=document.createElement("div");
+  star.innerHTML="✦"; star.classList.add("star");
+  star.style.left=Math.random()*window.innerWidth+"px";
+  star.style.fontSize=(Math.random()*1.2+0.4)+"rem";
+  star.style.animationDuration=(2+Math.random()*3)+"s";
+  document.body.appendChild(star);
+  setTimeout(()=>star.remove(),5000);
 }
 setInterval(createStar,250);
 
 // Mensajes flotantes
 const messages=[
-    "Eres la mejor niña.","Siempre pienso en ti princesa.","Tú eres mi alegría.",
-    "Mi solecito.","Tu sonrisa ilumina mis días.","Eres mi razón para sonreír."
+  "Eres la mejor niña.","Siempre pienso en ti princesa.","Tú eres mi alegría.",
+  "Mi solecito.","Tu sonrisa ilumina mis días.","Eres mi razón para sonreír."
 ];
 function startFloatingMessages(){
-    setInterval(()=>{
-        const msg=messages[Math.floor(Math.random()*messages.length)];
-        const div=document.createElement("div");
-        div.classList.add("floating-message");
-        div.innerText=msg;
-        div.style.top=(Math.random()*150 + 200)+"px"; 
-        div.style.left=Math.random()*window.innerWidth*0.6+"px";
-        document.body.appendChild(div);
-        setTimeout(()=>{div.style.opacity=1;},50);
-        setTimeout(()=>{
-            div.style.opacity=0;
-            setTimeout(()=>div.remove(),1500);
-        },3000);
-    },3500);
+  setInterval(()=>{
+    const msg=messages[Math.floor(Math.random()*messages.length)];
+    const div=document.createElement("div");
+    div.classList.add("floating-message");
+    div.innerText=msg;
+    div.style.top=(Math.random()*150 + 200)+"px"; 
+    div.style.left=Math.random()*window.innerWidth*0.6+"px";
+    document.body.appendChild(div);
+    setTimeout(()=>{div.style.opacity=1;},50);
+    setTimeout(()=>{
+      div.style.opacity=0;
+      setTimeout(()=>div.remove(),1500);
+    },3000);
+  },3500);
 }
 window.addEventListener('DOMContentLoaded', startFloatingMessages);
 </script>
