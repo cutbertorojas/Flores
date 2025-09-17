@@ -86,7 +86,7 @@
             align-items: center;
         }
 
-        /* Posicionamiento optimizado para móviles */
+        /* Posicionamiento corregido - ramo orientado correctamente */
         .sunflower:nth-child(1) {
             left: 50%;
             transform: translateX(-50%);
@@ -95,26 +95,26 @@
         }
 
         .sunflower:nth-child(2) {
-            left: 30%;
+            left: 65%;
             animation-delay: 1s;
             z-index: 4;
         }
 
         .sunflower:nth-child(3) {
-            left: 70%;
+            left: 35%;
             animation-delay: 2s;
             z-index: 4;
         }
 
         .sunflower:nth-child(4) {
-            left: 20%;
+            left: 75%;
             animation-delay: 0.5s;
             z-index: 3;
             height: 85%;
         }
 
         .sunflower:nth-child(5) {
-            left: 80%;
+            left: 25%;
             animation-delay: 1.5s;
             z-index: 3;
             height: 85%;
@@ -216,32 +216,6 @@
             25% { transform: rotate(3deg); }
             50% { transform: rotate(-3deg); }
             75% { transform: rotate(2deg); }
-        }
-
-        /* Corazón con latido natural */
-        #heart {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            opacity: 0;
-            margin-top: 2vh;
-            color: #ff6b6b;
-            animation: heartbeat 1.5s infinite;
-            text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
-            cursor: pointer;
-            transition: transform 0.3s;
-            z-index: 10;
-        }
-
-        #heart:hover {
-            transform: scale(1.1);
-        }
-
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            15% { transform: scale(1.1); }
-            30% { transform: scale(1); }
-            45% { transform: scale(1.05); }
-            60% { transform: scale(1); }
-            100% { transform: scale(1); }
         }
 
         /* Mensajes aleatorios por toda la pantalla */
@@ -381,7 +355,7 @@
                 <div class="leaf"></div>
             </div>
 
-            <!-- Girasol 2 (izquierda) -->
+            <!-- Girasol 2 (derecha) -->
             <div class="sunflower">
                 <div class="stem" style="height: 85%;"></div>
                 <div class="flower-head" style="width: 70px; height: 70px;">
@@ -407,7 +381,7 @@
                 <div class="leaf"></div>
             </div>
 
-            <!-- Girasol 3 (derecha) -->
+            <!-- Girasol 3 (izquierda) -->
             <div class="sunflower">
                 <div class="stem" style="height: 85%;"></div>
                 <div class="flower-head" style="width: 70px; height: 70px;">
@@ -433,7 +407,7 @@
                 <div class="leaf"></div>
             </div>
 
-            <!-- Girasoles adicionales -->
+            <!-- Girasoles adicionales (derecha) -->
             <div class="sunflower">
                 <div class="stem" style="height: 75%;"></div>
                 <div class="flower-head" style="width: 60px; height: 60px;">
@@ -459,6 +433,7 @@
                 <div class="leaf"></div>
             </div>
 
+            <!-- Girasoles adicionales (izquierda) -->
             <div class="sunflower">
                 <div class="stem" style="height: 75%;"></div>
                 <div class="flower-head" style="width: 60px; height: 60px;">
@@ -484,16 +459,7 @@
                 <div class="leaf"></div>
             </div>
         </div>
-
-        <!-- Corazón -->
-        <div id="heart">❤️</div>
     </div>
-
-    <!-- Sonido del corazón -->
-    <audio id="heartbeat-sound" preload="auto">
-        <source src="https://www.soundjay.com/human/heartbeat-01.mp3" type="audio/mpeg">
-        Tu navegador no soporta el elemento de audio.
-    </audio>
 
     <script>
         // Texto principal animado
@@ -501,8 +467,6 @@
         let i = 0;
         const speed = 80;
         const mainMessage = document.getElementById("main-message");
-        const heart = document.getElementById("heart");
-        const heartbeatSound = document.getElementById("heartbeat-sound");
 
         function typeWriter() {
             if (i < text.length) {
@@ -510,16 +474,6 @@
                 i++;
                 setTimeout(typeWriter, speed);
             } else {
-                // Mostrar corazón con sonido
-                setTimeout(() => {
-                    heart.style.opacity = 1;
-                    document.body.addEventListener("click", () => {
-                        setInterval(() => {
-                            heartbeatSound.currentTime = 0;
-                            heartbeatSound.play().catch(e => console.log("Reproducción de audio prevenida:", e));
-                        }, 1500);
-                    }, { once: true });
-                }, 4000);
                 startFloatingMessages();
             }
         }
@@ -541,7 +495,8 @@
             setTimeout(() => star.remove(), 5000);
         }
         setInterval(createStar, 250);
-// Mensajes flotantes por toda la pantalla
+
+        // Mensajes flotantes por toda la pantalla
         const messages = [
             "Eres la mejor niña.",
             "Siempre pienso en ti princesa.",
@@ -549,9 +504,10 @@
             "Mi solecito.",
             "Tu sonrisa ilumina mis días.",
             "Eres mi razón para sonreír.",
+            "Cada día a tu lado es especial.",
             "Eres única y especial.",
             "Me haces muy feliz.",
-           ];
+        ];
 
         function startFloatingMessages() {
             setInterval(() => {
