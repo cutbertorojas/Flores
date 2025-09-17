@@ -1,582 +1,187 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Ti ❤️</title>
-<style>
-* {margin:0; padding:0; box-sizing:border-box;}
-body {
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-start;
-  background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
-    url('https://images.unsplash.com/photo-1501973801540-537f08ccae7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  text-align:center;
-  overflow-x: hidden;
-  color:#fff;
-  padding:15px;
-}
-.container {
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-start;
-  padding:10px;
-  margin-top:20px;
-  z-index:10;
-}
-#main-message {
-  font-size:clamp(1.2rem,5vw,1.8rem);
-  white-space:pre-wrap;
-  border-right:2px solid white;
-  width:fit-content;
-  animation:blink 0.8s infinite;
-  margin-bottom:20px;
-  background:rgba(0,0,0,0.4);
-  padding:12px 15px;
-  border-radius:12px;
-  text-shadow:2px 2px 6px rgba(0,0,0,0.9);
-  line-height:1.5;
-  backdrop-filter:blur(5px);
-  text-align:center;
-  max-width:95%;
-}
-@keyframes blink {50% {border-color:transparent;}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flores Amarillas</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(to top, #ff914d, #ff5e62, #6a0572);
+      font-family: 'Segoe UI', sans-serif;
+    }
 
-/* Mensajes flotantes */
-.floating-message {
-  position:absolute;
-  font-size:clamp(0.9rem,4vw,1.2rem);
-  opacity:0;
-  padding:8px 12px;
-  text-shadow:2px 2px 5px black;
-  background:rgba(0,0,0,0.5);
-  border-radius:8px;
-  backdrop-filter:blur(5px);
-  text-align:center;
-  transition:opacity 1.5s ease-in-out;
-  z-index:5;
-  max-width:40%;
-}
+    /* Texto principal */
+    .special-text {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      color: #fffbea;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      animation: fadeIn 3s ease-in-out forwards;
+      z-index: 10;
+    }
 
-/* Estrellas cayendo diagonal */
-.star {
-  position:absolute; 
-  top:-10px; 
-  color:#FFD700; 
-  font-size:0.6rem; 
-  animation:fall linear; 
-  z-index:1;
-}
-@keyframes fall {to{transform:translateY(110vh) translateX(50vw) rotate(360deg);opacity:0;}}
+    /* Frases románticas */
+    .phrase {
+      position: absolute;
+      font-size: 20px;
+      font-weight: bold;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+      opacity: 0;
+      animation: fadePhrase 6s ease-in-out forwards;
+      z-index: 20;
+    }
 
-/* Contenedor de flores */
-.flower-container {
-  position: relative;
-  width: 100%;
-  height: 45vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  margin-bottom: 20px;
-}
+    @keyframes fadeIn {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+    }
 
-/* Girasoles - Posicionamiento corregido */
-.sunflower {
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transform-origin: bottom center;
-  animation: sway 6s ease-in-out infinite;
-  z-index: 2;
-}
+    @keyframes fadePhrase {
+      0% {opacity: 0; transform: translateY(20px) scale(0.9);}
+      20% {opacity: 1; transform: translateY(0) scale(1);}
+      80% {opacity: 1; transform: translateY(0) scale(1);}
+      100% {opacity: 0; transform: translateY(-20px) scale(0.9);}
+    }
 
-/* Posicionamiento específico para cada girasol */
-.sunflower:nth-child(1) {
-  left: 10%;
-  animation-delay: 0s;
-}
+    /* === FLORES (mantenidas del código original) === */
+    .flowers {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      pointer-events: none;
+    }
 
-.sunflower:nth-child(2) {
-  left: 30%;
-  animation-delay: 1s;
-}
+    .flower {
+      position: relative;
+      width: 20vmin;
+      height: 20vmin;
+    }
 
-.sunflower:nth-child(3) {
-  left: 50%;
-  transform: translateX(-50%);
-  animation-delay: 2s;
-  z-index: 3;
-}
+    .flower__line {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      height: 60vmin;
+      background: #2e8b57;
+      transform: translateX(-50%);
+      border-radius: 2px;
+      animation: grow-flower-tree 6s ease-in-out forwards;
+      transform-origin: bottom;
+    }
 
-.sunflower:nth-child(4) {
-  left: 70%;
-  animation-delay: 1.5s;
-}
+    .flower__leafs {
+      position: absolute;
+      bottom: 60vmin;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20vmin;
+      height: 20vmin;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      animation: blooming-leaf-1 6s ease-in-out forwards;
+    }
 
-.sunflower:nth-child(5) {
-  left: 90%;
-  transform: translateX(-100%);
-  animation-delay: 0.5s;
-}
+    .flower__leaf {
+      width: 8vmin;
+      height: 8vmin;
+      background: radial-gradient(circle, #ffeb3b, #fbc02d);
+      border-radius: 50%;
+      margin: -2vmin;
+      transform-origin: center;
+    }
 
-.stem {
-  width: 8px;
-  background: linear-gradient(to top, #2e8b57, #3cb371, #2e8b57);
-  border-radius: 4px;
-  height: 0;
-  animation: growStem 3s forwards;
-}
+    .flower__white-circle {
+      position: absolute;
+      width: 6vmin;
+      height: 6vmin;
+      background: radial-gradient(circle, #fff176, #fdd835);
+      border-radius: 50%;
+    }
 
-.flower-head {
-  position: relative;
-  width: 0;
-  height: 0;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: growFlower 2s forwards;
-  animation-delay: 1s;
-  transform-origin: bottom center;
-}
+    /* Animaciones */
+    @keyframes grow-flower-tree {
+      0% {height: 0;}
+      100% {height: 60vmin;}
+    }
 
-.flower-center {
-  position: absolute;
-  width: 35px;
-  height: 35px;
-  background: radial-gradient(circle, #654321 0%, #8B4513 70%, #654321 100%);
-  border-radius: 50%;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-}
-
-.center-detail {
-  width: 80%;
-  height: 80%;
-  background: radial-gradient(circle, #8B4513 0%, #654321 70%);
-  border-radius: 50%;
-  opacity: 0.8;
-  position: relative;
-  overflow: hidden;
-}
-
-.petals {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.petal {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 22px;
-  height: 55px;
-  background: linear-gradient(to bottom, #FFD700, #FFA500, #FF8C00);
-  border-radius: 50% 50% 50% 50%/60% 60% 40% 40%;
-  transform-origin: bottom center;
-  opacity: 0;
-  animation: showPetals 1s forwards;
-  animation-delay: 2.5s;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-  z-index: 1;
-}
-
-/* Posicionamiento de pétalos */
-.petal:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-40px); }
-.petal:nth-child(2) { transform: translate(-50%, -50%) rotate(30deg) translateY(-40px); }
-.petal:nth-child(3) { transform: translate(-50%, -50%) rotate(60deg) translateY(-40px); }
-.petal:nth-child(4) { transform: translate(-50%, -50%) rotate(90deg) translateY(-40px); }
-.petal:nth-child(5) { transform: translate(-50%, -50%) rotate(120deg) translateY(-40px); }
-.petal:nth-child(6) { transform: translate(-50%, -50%) rotate(150deg) translateY(-40px); }
-.petal:nth-child(7) { transform: translate(-50%, -50%) rotate(180deg) translateY(-40px); }
-.petal:nth-child(8) { transform: translate(-50%, -50%) rotate(210deg) translateY(-40px); }
-.petal:nth-child(9) { transform: translate(-50%, -50%) rotate(240deg) translateY(-40px); }
-.petal:nth-child(10) { transform: translate(-50%, -50%) rotate(270deg) translateY(-40px); }
-.petal:nth-child(11) { transform: translate(-50%, -50%) rotate(300deg) translateY(-40px); }
-.petal:nth-child(12) { transform: translate(-50%, -50%) rotate(330deg) translateY(-40px); }
-
-.leaf {
-  position: absolute;
-  width: 28px;
-  height: 20px;
-  background: linear-gradient(to right, #2e8b57, #3cb371);
-  border-radius: 50% 0 50% 50%;
-  transform: rotate(45deg);
-  opacity: 0;
-  animation: showLeaf 1s forwards;
-  animation-delay: 3s;
-  z-index: 0;
-}
-
-.sunflower:nth-child(1) .leaf:nth-child(1) {
-  bottom: 40%;
-  left: calc(50% - 5px);
-}
-
-.sunflower:nth-child(1) .leaf:nth-child(2) {
-  bottom: 60%;
-  left: calc(50% + 8px);
-  transform: rotate(-20deg);
-}
-
-/* Animaciones */
-@keyframes growStem {
-  to { height: 180px; }
-}
-
-@keyframes growFlower {
-  to { width: 90px; height: 90px; }
-}
-
-@keyframes showPetals {
-  to { opacity: 1; }
-}
-
-@keyframes showLeaf {
-  to { opacity: 0.8; }
-}
-
-@keyframes sway {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(3deg); }
-  50% { transform: rotate(-3deg); }
-  75% { transform: rotate(2deg); }
-}
-
-/* Ajustes para móviles */
-@media (max-width: 768px) {
-  .sunflower:nth-child(1) {
-    left: 5%;
-  }
-  
-  .sunflower:nth-child(2) {
-    left: 25%;
-  }
-  
-  .sunflower:nth-child(4) {
-    left: 75%;
-  }
-  
-  .sunflower:nth-child(5) {
-    left: 95%;
-    transform: translateX(-100%);
-  }
-  
-  .stem {
-    width: 6px;
-  }
-  
-  @keyframes growStem {
-    to { height: 150px; }
-  }
-  
-  @keyframes growFlower {
-    to { width: 70px; height: 70px; }
-  }
-  
-  .petal {
-    width: 18px;
-    height: 45px;
-  }
-  
-  .petal:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-32px); }
-  .petal:nth-child(2) { transform: translate(-50%, -50%) rotate(30deg) translateY(-32px); }
-  .petal:nth-child(3) { transform: translate(-50%, -50%) rotate(60deg) translateY(-32px); }
-  .petal:nth-child(4) { transform: translate(-50%, -50%) rotate(90deg) translateY(-32px); }
-  .petal:nth-child(5) { transform: translate(-50%, -50%) rotate(120deg) translateY(-32px); }
-  .petal:nth-child(6) { transform: translate(-50%, -50%) rotate(150deg) translateY(-32px); }
-  .petal:nth-child(7) { transform: translate(-50%, -50%) rotate(180deg) translateY(-32px); }
-  .petal:nth-child(8) { transform: translate(-50%, -50%) rotate(210deg) translateY(-32px); }
-  .petal:nth-child(9) { transform: translate(-50%, -50%) rotate(240deg) translateY(-32px); }
-  .petal:nth-child(10) { transform: translate(-50%, -50%) rotate(270deg) translateY(-32px); }
-  .petal:nth-child(11) { transform: translate(-50%, -50%) rotate(300deg) translateY(-32px); }
-  .petal:nth-child(12) { transform: translate(-50%, -50%) rotate(330deg) translateY(-32px); }
-}
-
-@media (max-width: 480px) {
-  .flower-container {
-    height: 40vh;
-  }
-  
-  .sunflower:nth-child(1) {
-    left: 3%;
-  }
-  
-  .sunflower:nth-child(2) {
-    left: 23%;
-  }
-  
-  .sunflower:nth-child(4) {
-    left: 77%;
-  }
-  
-  .sunflower:nth-child(5) {
-    left: 97%;
-  }
-  
-  @keyframes growStem {
-    to { height: 130px; }
-  }
-  
-  @keyframes growFlower {
-    to { width: 60px; height: 60px; }
-  }
-  
-  .petal {
-    width: 16px;
-    height: 40px;
-  }
-  
-  .petal:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg) translateY(-28px); }
-  .petal:nth-child(2) { transform: translate(-50%, -50%) rotate(30deg) translateY(-28px); }
-  .petal:nth-child(3) { transform: translate(-50%, -50%) rotate(60deg) translateY(-28px); }
-  .petal:nth-child(4) { transform: translate(-50%, -50%) rotate(90deg) translateY(-28px); }
-  .petal:nth-child(5) { transform: translate(-50%, -50%) rotate(120deg) translateY(-28px); }
-  .petal:nth-child(6) { transform: translate(-50%, -50%) rotate(150deg) translateY(-28px); }
-  .petal:nth-child(7) { transform: translate(-50%, -50%) rotate(180deg) translateY(-28px); }
-  .petal:nth-child(8) { transform: translate(-50%, -50%) rotate(210deg) translateY(-28px); }
-  .petal:nth-child(9) { transform: translate(-50%, -50%) rotate(240deg) translateY(-28px); }
-  .petal:nth-child(10) { transform: translate(-50%, -50%) rotate(270deg) translateY(-28px); }
-  .petal:nth-child(11) { transform: translate(-50%, -50%) rotate(300deg) translateY(-28px); }
-  .petal:nth-child(12) { transform: translate(-50%, -50%) rotate(330deg) translateY(-28px); }
-}
-</style>
+    @keyframes blooming-leaf-1 {
+      0% {transform: scale(0);}
+      100% {transform: scale(1);}
+    }
+  </style>
 </head>
 <body>
-
-<div class="container">
-  <div id="main-message"></div>
-</div>
-
-<!-- Girasoles con posicionamiento corregido -->
-<div class="flower-container">
-  <!-- Girasol 1 -->
-  <div class="sunflower">
-    <div class="stem"></div>
-    <div class="flower-head">
-      <div class="flower-center">
-        <div class="center-detail"></div>
-      </div>
-      <div class="petals">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-      </div>
-    </div>
-    <div class="leaf"></div>
-    <div class="leaf"></div>
+  <!-- Texto principal -->
+  <div class="special-text">
+    Las flores amarillas representan la felicidad.<br>
+    Y tú eres la mía ❤️
   </div>
 
-  <!-- Girasol 2 -->
-  <div class="sunflower">
-    <div class="stem" style="height: 160px;"></div>
-    <div class="flower-head" style="width: 80px; height: 80px;">
-      <div class="flower-center" style="width: 30px; height: 30px;">
-        <div class="center-detail"></div>
-      </div>
-      <div class="petals">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
+  <!-- Flores -->
+  <div class="flowers">
+    <div class="flower">
+      <div class="flower__line"></div>
+      <div class="flower__leafs">
+        <div class="flower__leaf"></div>
+        <div class="flower__leaf"></div>
+        <div class="flower__leaf"></div>
+        <div class="flower__leaf"></div>
+        <div class="flower__leaf"></div>
+        <div class="flower__leaf"></div>
+        <div class="flower__white-circle"></div>
       </div>
     </div>
-    <div class="leaf"></div>
-    <div class="leaf"></div>
   </div>
 
-  <!-- Girasol 3 (central) -->
-  <div class="sunflower">
-    <div class="stem" style="height: 180px;"></div>
-    <div class="flower-head" style="width: 90px; height: 90px;">
-      <div class="flower-center" style="width: 35px; height: 35px;">
-        <div class="center-detail"></div>
-      </div>
-      <div class="petals">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-      </div>
-    </div>
-    <div class="leaf"></div>
-    <div class="leaf"></div>
-  </div>
+  <script>
+    const frases = [
+      "Eres la mejor niña.",
+      "Siempre pienso en mi princesita.",
+      "Tú eres mi alegría.",
+      "Mi solecito.",
+      "Tu sonrisa ilumina mis días.",
+      "Eres mi razón para sonreír.",
+      "Eres única y especial.",
+      "Me haces muy feliz."
+    ];
 
-  <!-- Girasol 4 -->
-  <div class="sunflower">
-    <div class="stem" style="height: 160px;"></div>
-    <div class="flower-head" style="width: 80px; height: 80px;">
-      <div class="flower-center" style="width: 30px; height: 30px;">
-        <div class="center-detail"></div>
-      </div>
-      <div class="petals">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-      </div>
-    </div>
-    <div class="leaf"></div>
-    <div class="leaf"></div>
-  </div>
+    const colores = ["#fffacd", "#ffe4b5", "#ffd700", "#ffb347", "#ffdab9"];
 
-  <!-- Girasol 5 -->
-  <div class="sunflower">
-    <div class="stem" style="height: 170px;"></div>
-    <div class="flower-head" style="width: 85px; height: 85px;">
-      <div class="flower-center" style="width: 32px; height: 32px;">
-        <div class="center-detail"></div>
-      </div>
-      <div class="petals">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-      </div>
-    </div>
-    <div class="leaf"></div>
-    <div class="leaf"></div>
-  </div>
-</div>
+    function mostrarFrase() {
+      const frase = frases[Math.floor(Math.random() * frases.length)];
+      const fraseEl = document.createElement("div");
+      fraseEl.className = "phrase";
+      fraseEl.textContent = frase;
 
-<script>
-// Texto principal animado
-const text = "Las flores amarillas representan la felicidad.\nY tú eres la mía ❤️";
-let i = 0;
-const mainMessage = document.getElementById("main-message");
+      // Posición aleatoria
+      fraseEl.style.top = Math.random() * 80 + "%";
+      fraseEl.style.left = Math.random() * 80 + "%";
 
-function typeWriter() {
-  if (i < text.length) {
-    mainMessage.innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeWriter, 80);
-  } else {
-    startFloatingMessages();
-  }
-}
+      // Color aleatorio
+      fraseEl.style.color = colores[Math.floor(Math.random() * colores.length)];
 
-// Estrellitas cayendo en diagonal
-function createStar() {
-  const star = document.createElement("div");
-  star.innerHTML = "✦";
-  star.classList.add("star");
-  star.style.left = Math.random() * window.innerWidth + "px";
-  star.style.fontSize = (Math.random() * 1.2 + 0.4) + "rem";
-  star.style.animationDuration = (2 + Math.random() * 3) + "s";
-  document.body.appendChild(star);
-  setTimeout(() => star.remove(), 5000);
-}
+      document.body.appendChild(fraseEl);
 
-// Mensajes flotantes aleatorios sin repetición consecutiva
-const messages = [
-  "Eres la mejor niña.",
-  "Siempre pienso en ti princesa.",
-  "Tú eres mi alegría.",
-  "Mi solecito.",
-  "Tu sonrisa ilumina mis días.",
-  "Eres mi razón para sonreír.",
-  "Eres única y especial.",
-  "Me haces muy feliz."
-];
+      // Eliminar después de animación
+      setTimeout(() => fraseEl.remove(), 6000);
+    }
 
-let lastMessageIndex = -1;
-
-function getRandomMessage() {
-  let randomIndex;
-  // Asegurarse de que no se repita el mismo mensaje consecutivo
-  do {
-    randomIndex = Math.floor(Math.random() * messages.length);
-  } while (randomIndex === lastMessageIndex && messages.length > 1);
-  
-  lastMessageIndex = randomIndex;
-  return messages[randomIndex];
-}
-
-function startFloatingMessages() {
-  setInterval(() => {
-    const msg = getRandomMessage();
-    const div = document.createElement("div");
-    div.classList.add("floating-message");
-    div.innerText = msg;
-    
-    // Posición aleatoria que no tape los elementos principales
-    const top = Math.random() * 150 + 200;
-    const left = Math.random() * (window.innerWidth - 150);
-    div.style.top = `${top}px`;
-    div.style.left = `${left}px`;
-    
-    document.body.appendChild(div);
-    
-    setTimeout(() => {
-      div.style.opacity = 1;
-    }, 50);
-    
-    setTimeout(() => {
-      div.style.opacity = 0;
-      setTimeout(() => div.remove(), 1500);
-    }, 3000);
-  }, 3500);
-}
-
-// Iniciar cuando el DOM esté cargado
-window.addEventListener('DOMContentLoaded', () => {
-  typeWriter();
-  setInterval(createStar, 250);
-});
-</script>
+    // Mostrar frases cada 4 segundos
+    setInterval(mostrarFrase, 4000);
+  </script>
 </body>
 </html>
