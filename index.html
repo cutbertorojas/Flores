@@ -76,28 +76,37 @@ body {
 @keyframes fall {to{transform:translateY(110vh) translateX(50vw) rotate(360deg);opacity:0;}}
 
 /* ============================= */
-/* Girasoles - Diseño anterior optimizado para móviles */
-.flowers {
-  position: absolute;
-  bottom: 0;
+/* Girasoles - Posicionamiento corregido */
+.flowers-container {
+  position: relative;
   width: 100%;
-  height: 50vh;
-  display:flex;
-  justify-content:space-around;
-  align-items:flex-end;
-  gap:2vw;
-  transform: scale(0.8);
+  height: 45vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.flowers {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 95%;
+  height: 100%;
   z-index:3;
   pointer-events:none;
+  padding: 0 5px;
 }
 
 .flower {
   position: relative;
   transform-origin: bottom center;
-  height: 45vmin;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
+  max-width: 20%;
 }
 
 .flower--1 { animation: moving-flower-1 4s ease-in-out infinite; }
@@ -109,8 +118,8 @@ body {
 .flower__leafs {
   position: relative;
   animation: blooming-flower 2s backwards;
-  width: 20vmin;
-  height: 20vmin;
+  width: 22vmin;
+  height: 22vmin;
   margin-bottom: 5px;
 }
 
@@ -118,8 +127,8 @@ body {
   position: absolute;
   bottom: 0;
   left: 50%;
-  width: 20vmin;
-  height: 5vmin;
+  width: 22vmin;
+  height: 6vmin;
   border-radius: 60% 40% 60% 40%;
   background: linear-gradient(to top, #ff8c00, #ffd700, #ffff00);
   transform-origin: bottom center;
@@ -130,19 +139,21 @@ body {
 
 .flower__white-circle {
   position: absolute;
-  left: -4vmin;
-  top: -4vmin;
-  width: 8vmin;
-  height: 8vmin;
+  left: 50%;
+  top: 50%;
+  width: 9vmin;
+  height: 9vmin;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #654321, #8b4513, #2f1b14);
   box-shadow: inset 0 0 2vmin rgba(0, 0, 0, 0.8),
               0 0 1vmin rgba(139, 69, 19, 0.6);
+  transform: translate(-50%, -50%);
+  z-index: 2;
 }
 
 .flower__line {
   height: 40vmin;
-  width: 1.5vmin;
+  width: 1.8vmin;
   background: linear-gradient(to top, transparent 10%, #2d5016, #4a7c23, #6b8e23);
   animation: grow-flower-tree 4s backwards;
   position: relative;
@@ -153,16 +164,16 @@ body {
 .flower__line::after {
   content:"";
   position: absolute;
-  width: 8vmin;
-  height: 4vmin;
+  width: 9vmin;
+  height: 4.5vmin;
   background: radial-gradient(circle at 30% 30%, #3b7a1e, #2d5016);
   border-radius: 50% 50% 0 50%;
   top: 40%;
   transform-origin: center;
   box-shadow: inset 0 0 0.5vmin rgba(0,0,0,0.5);
 }
-.flower__line::before { left: -7vmin; transform: rotate(-30deg); }
-.flower__line::after { right: -7vmin; transform: rotate(30deg) scaleX(-1); }
+.flower__line::before { left: -8vmin; transform: rotate(-30deg); }
+.flower__line::after { right: -8vmin; transform: rotate(30deg) scaleX(-1); }
 
 /* Animaciones */
 @keyframes grow-flower-tree { 0% { height: 0; } }
@@ -175,9 +186,8 @@ body {
 
 /* Ajustes para móviles */
 @media (max-width: 480px) {
-  .flowers {
-    gap: 1vw;
-    transform: scale(0.7);
+  .flowers-container {
+    height: 40vh;
   }
   
   .flower__leafs {
@@ -187,19 +197,17 @@ body {
   
   .flower__leaf {
     width: 18vmin;
-    height: 4.5vmin;
+    height: 5vmin;
   }
   
   .flower__white-circle {
     width: 7vmin;
     height: 7vmin;
-    left: -3.5vmin;
-    top: -3.5vmin;
   }
   
   .flower__line {
     height: 35vmin;
-    width: 1.2vmin;
+    width: 1.5vmin;
   }
   
   .flower__line::before,
@@ -213,22 +221,39 @@ body {
 }
 
 @media (max-width: 380px) {
-  .flowers {
-    transform: scale(0.6);
+  .flowers-container {
+    height: 35vh;
+  }
+  
+  .flower__leafs {
+    width: 16vmin;
+    height: 16vmin;
+  }
+  
+  .flower__leaf {
+    width: 16vmin;
+    height: 4.5vmin;
+  }
+  
+  .flower__white-circle {
+    width: 6vmin;
+    height: 6vmin;
+  }
+  
+  .flower__line {
+    height: 30vmin;
   }
   
   #main-message {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     padding: 10px 12px;
   }
 }
 
 /* Ajustes para orientación horizontal */
 @media (max-height: 500px) and (orientation: landscape) {
-  .flowers {
-    height: 70vh;
-    transform: scale(0.6);
-    gap: 0.5vw;
+  .flowers-container {
+    height: 65vh;
   }
   
   .container {
@@ -239,6 +264,25 @@ body {
     margin-bottom: 10px;
     font-size: clamp(1rem, 4vw, 1.4rem);
   }
+  
+  .flower__leafs {
+    width: 15vmin;
+    height: 15vmin;
+  }
+  
+  .flower__leaf {
+    width: 15vmin;
+    height: 4vmin;
+  }
+  
+  .flower__white-circle {
+    width: 5vmin;
+    height: 5vmin;
+  }
+  
+  .flower__line {
+    height: 25vmin;
+  }
 }
 </style>
 </head>
@@ -248,106 +292,108 @@ body {
   <div id="main-message"></div>
 </div>
 
-<!-- Girasoles con diseño anterior -->
-<div class="flowers">
-  <!-- Flor 1 -->
-  <div class="flower flower--1">
-    <div class="flower__leafs">
-      <div class="flower__white-circle"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg)"></div>
+<!-- Girasoles con posicionamiento corregido -->
+<div class="flowers-container">
+  <div class="flowers">
+    <!-- Flor 1 -->
+    <div class="flower flower--1">
+      <div class="flower__leafs">
+        <div class="flower__white-circle"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg)"></div>
+      </div>
+      <div class="flower__line"></div>
     </div>
-    <div class="flower__line"></div>
-  </div>
 
-  <!-- Flor 2 -->
-  <div class="flower flower--2">
-    <div class="flower__leafs">
-      <div class="flower__white-circle"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg)"></div>
+    <!-- Flor 2 -->
+    <div class="flower flower--2">
+      <div class="flower__leafs">
+        <div class="flower__white-circle"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg)"></div>
+      </div>
+      <div class="flower__line"></div>
     </div>
-    <div class="flower__line"></div>
-  </div>
 
-  <!-- Flor 3 -->
-  <div class="flower flower--3">
-    <div class="flower__leafs">
-      <div class="flower__white-circle"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg)"></div>
+    <!-- Flor 3 -->
+    <div class="flower flower--3">
+      <div class="flower__leafs">
+        <div class="flower__white-circle"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg)"></div>
+      </div>
+      <div class="flower__line"></div>
     </div>
-    <div class="flower__line"></div>
-  </div>
 
-  <!-- Flor 4 -->
-  <div class="flower flower--4">
-    <div class="flower__leafs">
-      <div class="flower__white-circle"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg)"></div>
+    <!-- Flor 4 -->
+    <div class="flower flower--4">
+      <div class="flower__leafs">
+        <div class="flower__white-circle"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg)"></div>
+      </div>
+      <div class="flower__line"></div>
     </div>
-    <div class="flower__line"></div>
-  </div>
 
-  <!-- Flor 5 -->
-  <div class="flower flower--5">
-    <div class="flower__leafs">
-      <div class="flower__white-circle"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg)"></div>
-      <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg)"></div>
+    <!-- Flor 5 -->
+    <div class="flower flower--5">
+      <div class="flower__leafs">
+        <div class="flower__white-circle"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(0deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(30deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(60deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(90deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(120deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(150deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(180deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(210deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(240deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(270deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(300deg)"></div>
+        <div class="flower__leaf" style="transform:translate(-50%,-10%) rotate(330deg)"></div>
+      </div>
+      <div class="flower__line"></div>
     </div>
-    <div class="flower__line"></div>
   </div>
 </div>
 
