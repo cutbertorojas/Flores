@@ -713,8 +713,6 @@
     font-size: 3.5vmin;
     text-shadow: 0 0 1vmin rgba(255, 255, 255, 0.5);
     z-index: 10;
-    opacity: 0;
-    animation: fadeIn 3s 1s forwards;
     text-align: center;
     width: 90%;
     max-width: 800px;
@@ -722,19 +720,21 @@
 
 .typewriter-line {
     overflow: hidden;
-    border-right: 0.15em solid orange;
     white-space: nowrap;
     margin: 0 auto;
     letter-spacing: 0.05em;
     width: 0;
+    opacity: 1 !important;
 }
 
-.typewriter-line:first-child {
+.first-line {
+    border-right: 0.15em solid orange;
     animation: typing-first 4s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
 }
 
-.typewriter-line:last-child {
-    animation: typing-second 4s steps(30, end) 4s forwards, blink-caret 0.75s step-end infinite;
+.second-line {
+    border-right: 0.15em solid orange;
+    animation: typing-second 3s steps(30, end) 4.5s forwards, blink-caret 0.75s step-end infinite;
     margin-top: 2vmin;
 }
 
@@ -754,18 +754,28 @@
     50% { border-color: orange; }
 }
 
+/* Estilos para las frases aleatorias */
+.random-text {
+    position: fixed;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    font-size: 2.8vmin;
+    text-shadow: 0 0 1vmin rgba(255, 255, 255, 0.5);
+    z-index: 10;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 300px;
+    opacity: 0;
+}
 
-// Frases aleatorias con sistema que evita repeticiones
-const phrases = [
-    "Eres la mejor niña.",
-    "Siempre pienso en mi princesita.",
-    "Tú eres mi alegría.",
-    "Mi solecito.",
-    "Tu sonrisa ilumina mis días.",
-    "Eres mi razón para sonreír.",
-    "Eres única y especial.",
-    "Me haces muy feliz."
-];
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
 
 let usedPhrases = [];
 let availablePhrases = [...phrases];
@@ -1044,11 +1054,12 @@ setInterval(showRandomPhrase, 10000);
 <body class="not-loaded">
   <div class="night"></div>
 
-<div class="special-text">
-    <div class="typewriter-line">Las flores amarillas representan la felicidad ☺️.</div>
-    <div class="typewriter-line">Y tú eres la mía ❤️</div>
-</div>>
-  <div class="random-text"></div>
+<<div class="special-text">
+    <div class="typewriter-line first-line">Las flores amarillas representan la felicidad ☺️.</div>
+    <div class="typewriter-line second-line">Y tú eres la mía ❤️</div>
+</div>
+
+<div class="random-text"></div>
 
   <div class="shooting-stars">
     <div class="shooting-star"></div>
@@ -1369,23 +1380,38 @@ setInterval(showRandomPhrase, 10000);
       const c = setTimeout(() => {
         document.body.classList.remove("not-loaded");
 
-        // Frases aleatorias
-        const phrases = [
-          "Eres la mejor niña.",
-          "Siempre pienso en mi princesita.",
-          "Tú eres mi alegría.",
-          "Mi solecito.",
-          "Tu sonrisa ilumina mis días.",
-          "Eres mi razón para sonreír.",
-          "Eres única y especial.",
-          "Me haces muy feliz."
-        ];
+ // Frases aleatorias con sistema que evita repeticiones
+const phrases = [
+    "Eres la mejor niña.",
+    "Siempre pienso en mi princesita.",
+    "Tú eres mi alegría.",
+    "Mi solecito.",
+    "Tu sonrisa ilumina mis días.",
+    "Eres mi razón para sonreír.",
+    "Eres única y especial.",
+    "Me haces muy feliz."
+];
 
- 
+let usedPhrases = [];
+let availablePhrases = [...phrases];
+
 function showRandomPhrase() {
-    const randomIndex = Math.floor(Math.random() * phrases.length);
+    // Si ya se usaron todas las frases, reiniciamos
+    if (availablePhrases.length === 0) {
+        availablePhrases = [...phrases];
+        usedPhrases = [];
+    }
+    
+    // Seleccionar una frase aleatoria de las disponibles
+    const randomIndex = Math.floor(Math.random() * availablePhrases.length);
+    const selectedPhrase = availablePhrases[randomIndex];
+    
+    // Mover la frase de disponibles a usadas
+    availablePhrases.splice(randomIndex, 1);
+    usedPhrases.push(selectedPhrase);
+    
     const phraseElement = document.querySelector('.random-text');
-    phraseElement.textContent = phrases[randomIndex];
+    phraseElement.textContent = selectedPhrase;
     
     // Posiciones aleatorias en la pantalla
     const randomTop = Math.floor(Math.random() * 70) + 15; // 15% a 85%
@@ -1395,40 +1421,16 @@ function showRandomPhrase() {
     phraseElement.style.left = randomLeft + '%';
     phraseElement.style.transform = 'translate(-50%, -50%)';
     
-    phraseElement.style.animation = 'none';
-    setTimeout(() => {
-        phraseElement.style.animation = 'fadeInOut 8s infinite';
-    }, 10);
+    // Aplicar animación
+    phraseElement.style.animation = 'fadeInOut 8s forwards';
 }
 
-
-
-        // Mostrar una frase aleatoria cada 10 segundos
-        showRandomPhrase();
-        setInterval(showRandomPhrase, 10000);
-
-        function createShootingStar() {
-          const star = document.createElement('div');
-          star.className = 'shooting-star';
-          star.style.top = Math.random() * 60 + '%';
-          star.style.animationDelay = '0s';
-          star.style.animationDuration = (Math.random() * 1.5 + 2) + 's';
-
-          document.querySelector('.shooting-stars').appendChild(star);
-
-          setTimeout(() => {
-            star.remove();
-          }, 4000);
-        }
-
-        setInterval(() => {
-          if (Math.random() > 0.3) { 
-            createShootingStar();
-          }
-        }, Math.random() * 5000 + 3000);
-        clearTimeout(c);
-      }, 1000);
-    };
+// Iniciar animaciones después de que la página cargue
+setTimeout(() => {
+    // Mostrar una frase aleatoria cada 10 segundos
+    showRandomPhrase();
+    setInterval(showRandomPhrase, 10000);
+}, 1000);
 
   </script>
 <div class="random-text"></div>
