@@ -738,26 +738,22 @@
     from, to { border-color: transparent }
     50% { border-color: orange; }
 }
-        /* Estilos para las frases aleatorias */
-        .random-text {
-            position: fixed;
-            bottom: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #fff;
-            font-family: 'Arial', sans-serif;
-            font-size: 3vmin;
-            text-shadow: 0 0 1vmin rgba(255, 255, 255, 0.5);
-            z-index: 10;
-            opacity: 0;
-            text-align: center;
-            width: 90%;
-            max-width: 600px;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 15px;
-            border-radius: 10px;
-            animation: fadeInOut 8s infinite;
-        }
+   /* Estilos para las frases aleatorias */
+.random-text {
+    position: fixed;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    font-size: 2.8vmin;
+    text-shadow: 0 0 1vmin rgba(255, 255, 255, 0.5);
+    z-index: 10;
+    opacity: 0;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 15px;
+    border-radius: 10px;
+    animation: fadeInOut 8s infinite;
+    max-width: 300px;
+}
 
         /* KEYFRAMES */
         @keyframes fadeIn {
@@ -998,7 +994,7 @@
   <div class="night"></div>
 
 <div class="special-text">
-    <div class="typewriter">Las flores amarillas representan la felicidad. Y tú eres la mía ❤️</div>
+    <div class="typewriter">Las flores amarillas representan la felicidad. \n Y tú eres la mía ❤️</div>
 </div>
   <div class="random-text"></div>
 
@@ -1333,15 +1329,28 @@
           "Me haces muy feliz."
         ];
 
-        function showRandomPhrase() {
-          const randomIndex = Math.floor(Math.random() * phrases.length);
-          const phraseElement = document.querySelector('.random-text');
-          phraseElement.textContent = phrases[randomIndex];
-          phraseElement.style.animation = 'none';
-          setTimeout(() => {
-            phraseElement.style.animation = 'fadeInOut 8s infinite';
-          }, 10);
-        }
+ 
+function showRandomPhrase() {
+    const randomIndex = Math.floor(Math.random() * phrases.length);
+    const phraseElement = document.querySelector('.random-text');
+    phraseElement.textContent = phrases[randomIndex];
+    
+    // Posiciones aleatorias en la pantalla
+    const randomTop = Math.floor(Math.random() * 70) + 15; // 15% a 85%
+    const randomLeft = Math.floor(Math.random() * 70) + 15; // 15% a 85%
+    
+    phraseElement.style.top = randomTop + '%';
+    phraseElement.style.left = randomLeft + '%';
+    phraseElement.style.transform = 'translate(-50%, -50%)';
+    
+    phraseElement.style.animation = 'none';
+    setTimeout(() => {
+        phraseElement.style.animation = 'fadeInOut 8s infinite';
+    }, 10);
+}
+
+
+
         // Mostrar una frase aleatoria cada 10 segundos
         showRandomPhrase();
         setInterval(showRandomPhrase, 10000);
@@ -1368,6 +1377,8 @@
         clearTimeout(c);
       }, 1000);
     };
+
   </script>
+<div class="random-text"></div>
 </body>
 </html>
