@@ -700,7 +700,9 @@
           z-index: 100;
         }
 
-   /* Estilos para el texto principal */
+
+
+/* Estilos para el texto principal */
 .special-text {
     position: fixed;
     top: 5%;
@@ -708,7 +710,7 @@
     transform: translateX(-50%);
     color: #fff;
     font-family: 'Arial', sans-serif;
-    font-size: 3.5vmin; /* Reducido ligeramente */
+    font-size: 3.5vmin;
     text-shadow: 0 0 1vmin rgba(255, 255, 255, 0.5);
     z-index: 10;
     opacity: 0;
@@ -718,18 +720,31 @@
     max-width: 800px;
 }
 
-.typewriter {
+.typewriter-line {
     overflow: hidden;
     border-right: 0.15em solid orange;
     white-space: nowrap;
     margin: 0 auto;
-    letter-spacing: 0.05em; /* Reducido */
-    animation: typing 7s steps(60, end) forwards, blink-caret 0.75s step-end infinite;
+    letter-spacing: 0.05em;
     width: 0;
 }
 
+.typewriter-line:first-child {
+    animation: typing-first 4s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
+}
+
+.typewriter-line:last-child {
+    animation: typing-second 4s steps(30, end) 4s forwards, blink-caret 0.75s step-end infinite;
+    margin-top: 2vmin;
+}
+
 /* KEYFRAMES */
-@keyframes typing {
+@keyframes typing-first {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes typing-second {
     from { width: 0 }
     to { width: 100% }
 }
@@ -738,6 +753,8 @@
     from, to { border-color: transparent }
     50% { border-color: orange; }
 }
+
+
 // Frases aleatorias con sistema que evita repeticiones
 const phrases = [
     "Eres la mejor niña.",
@@ -1028,8 +1045,9 @@ setInterval(showRandomPhrase, 10000);
   <div class="night"></div>
 
 <div class="special-text">
-    <div class="typewriter">Las flores amarillas representan la felicidad. <br> Y tú eres la mía ❤️</div>
-</div>
+    <div class="typewriter-line">Las flores amarillas representan la felicidad ☺️.</div>
+    <div class="typewriter-line">Y tú eres la mía ❤️</div>
+</div>>
   <div class="random-text"></div>
 
   <div class="shooting-stars">
