@@ -738,22 +738,56 @@
     from, to { border-color: transparent }
     50% { border-color: orange; }
 }
-   /* Estilos para las frases aleatorias */
-.random-text {
-    position: fixed;
-    color: #fff;
-    font-family: 'Arial', sans-serif;
-    font-size: 2.8vmin;
-    text-shadow: 0 0 1vmin rgba(255, 255, 255, 0.5);
-    z-index: 10;
-    opacity: 0;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 15px;
-    border-radius: 10px;
-    animation: fadeInOut 8s infinite;
-    max-width: 300px;
+// Frases aleatorias con sistema que evita repeticiones
+const phrases = [
+    "Eres la mejor niña.",
+    "Siempre pienso en mi princesita.",
+    "Tú eres mi alegría.",
+    "Mi solecito.",
+    "Tu sonrisa ilumina mis días.",
+    "Eres mi razón para sonreír.",
+    "Eres única y especial.",
+    "Me haces muy feliz."
+];
+
+let usedPhrases = [];
+let availablePhrases = [...phrases];
+
+function showRandomPhrase() {
+    // Si ya se usaron todas las frases, reiniciamos
+    if (availablePhrases.length === 0) {
+        availablePhrases = [...phrases];
+        usedPhrases = [];
+    }
+    
+    // Seleccionar una frase aleatoria de las disponibles
+    const randomIndex = Math.floor(Math.random() * availablePhrases.length);
+    const selectedPhrase = availablePhrases[randomIndex];
+    
+    // Mover la frase de disponibles a usadas
+    availablePhrases.splice(randomIndex, 1);
+    usedPhrases.push(selectedPhrase);
+    
+    const phraseElement = document.querySelector('.random-text');
+    phraseElement.textContent = selectedPhrase;
+    
+    // Posiciones aleatorias en la pantalla
+    const randomTop = Math.floor(Math.random() * 70) + 15; // 15% a 85%
+    const randomLeft = Math.floor(Math.random() * 70) + 15; // 15% a 85%
+    
+    phraseElement.style.top = randomTop + '%';
+    phraseElement.style.left = randomLeft + '%';
+    phraseElement.style.transform = 'translate(-50%, -50%)';
+    
+    phraseElement.style.animation = 'none';
+    setTimeout(() => {
+        phraseElement.style.animation = 'fadeInOut 8s infinite';
+    }, 10);
 }
+
+// Mostrar una frase aleatoria cada 10 segundos
+showRandomPhrase();
+setInterval(showRandomPhrase, 10000);
 
         /* KEYFRAMES */
         @keyframes fadeIn {
