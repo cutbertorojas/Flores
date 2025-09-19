@@ -700,33 +700,44 @@
           z-index: 100;
         }
 
-        /* Estilos para el texto principal */
-        .special-text {
-            position: fixed;
-            top: 5%;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #fff;
-            font-family: 'Arial', sans-serif;
-            font-size: 4vmin;
-            text-shadow: 0 0 1vmin rgba(255, 255, 255, 0.5);
-            z-index: 10;
-            opacity: 0;
-            animation: fadeIn 3s 1s forwards;
-            text-align: center;
-            width: 90%;
-            max-width: 800px;
-        }
+   /* Estilos para el texto principal */
+.special-text {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    font-size: 3.5vmin; /* Reducido ligeramente */
+    text-shadow: 0 0 1vmin rgba(255, 255, 255, 0.5);
+    z-index: 10;
+    opacity: 0;
+    animation: fadeIn 3s 1s forwards;
+    text-align: center;
+    width: 90%;
+    max-width: 800px;
+}
 
-        .typewriter {
-            overflow: hidden;
-            border-right: 0.15em solid orange;
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: 0.15em;
-            animation: typing 5s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
+.typewriter {
+    overflow: hidden;
+    border-right: 0.15em solid orange;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 0.05em; /* Reducido */
+    animation: typing 7s steps(60, end) forwards, blink-caret 0.75s step-end infinite;
+    width: 0;
+}
 
+/* KEYFRAMES */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+}
         /* Estilos para las frases aleatorias */
         .random-text {
             position: fixed;
@@ -986,9 +997,9 @@
 <body class="not-loaded">
   <div class="night"></div>
 
-  <div class="special-text">
-    <div class="typewriter">Las flores amarillas representan<br> la felicidad.<br> Y tú eres la mía ❤️</div>
-  </div>
+<div class="special-text">
+    <div class="typewriter">Las flores amarillas representan la felicidad.<br> Y tú eres la mía ❤️</div>
+</div>
   <div class="random-text"></div>
 
   <div class="shooting-stars">
