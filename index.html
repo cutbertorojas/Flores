@@ -27,6 +27,7 @@
           background-color: var(--dark-color);
           overflow: hidden;
           perspective: 1000px;
+          font-family: 'Arial', sans-serif;
         }
 
         .night {
@@ -36,19 +37,10 @@
           width: 100%;
           height: 100%;
           filter: blur(0.1vmin);
-          background: url('https://images.unsplash.com/photo-1531086184411-3c7b7dccd0d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                     url('https://images.unsplash.com/photo-1531086184411-3c7b7dccd0d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
           background-size: cover;
           z-index: -1;
-        }
-
-        .night::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.4);
         }
 
         .shooting-stars {
@@ -71,6 +63,7 @@
           opacity: 0;
           animation: shootingStar 3s linear infinite;
         }
+
         .shooting-star::before {
           content: '';
           position: absolute;
@@ -211,6 +204,7 @@
           transform: rotate(20deg);
           animation: moving-flower-2 4s linear infinite;
         }
+
         .flower--2 .flower__line {
           height: 60vmin;
           animation-delay: 0.6s;
@@ -455,6 +449,7 @@
           top: 45%;
           transform: rotate(70deg) rotateY(30deg);
         }
+
         .flower__line__leaf--3,
         .flower__line__leaf--4{
           border-top-right-radius: 0;
@@ -602,12 +597,11 @@
           transform-origin: bottom center;
           transform: rotate(-2deg);
         }
-
         .flower__grass--bottom {
           margin-top: -2px;
           width: var(--line-w);
           height: 25vmin;
-          background-image: linear-gradient(to top, transparent, var(--c);
+          background-image: linear-gradient(to top, transparent, var(--c));
         }
 
         .flower__grass__leaf {
@@ -750,6 +744,7 @@
             border-radius: 10px;
             max-width: 300px;
             opacity: 0;
+            animation: fadeInOut 8s infinite;
         }
 
         /* KEYFRAMES */
@@ -775,19 +770,6 @@
             100% { opacity: 0; }
         }
 
-        .grow-ans {
-          animation: grow-ans 2s var(--d) backwards;
-        }
-
-        .growing-grass {
-          animation: growing-grass-ans 1s 2s backwards;
-        }
-
-        .not-loaded * {
-          animation-play-state: paused !important;
-        }
-
-        /* KEYFRAMES */
         @keyframes grow-ans {
           0% {
             transform: scale(0);
@@ -882,7 +864,6 @@
             opacity: 0;
           }
         }
-
         @keyframes moving-flower-1 {
           0%, 100% { transform: rotate(2deg); }
           50% { transform: rotate(-2deg); }
@@ -945,7 +926,6 @@
           50% { transform: scale(0.5) rotate(79deg) rotateX(10deg) rotateY(-200deg); }
         }
 
-        /* Animaciones para hierba adicional */
         @keyframes moving-grass--3 {
           0%, 100% { transform: scale(0.7) rotate(-30deg) rotateY(45deg); }
           50% { transform: scale(0.7) rotate(-33deg) rotateY(50deg); }
@@ -987,7 +967,7 @@
         }
     </style>
 </head>
-<body class="not-loaded">
+<body>
   <div class="night"></div>
 
   <div class="special-text">
@@ -1009,7 +989,7 @@
   </div>
 
   <div class="flowers">
-    <!-- Todo el código de las flores se mantiene igual -->
+    <!-- Todo el código de las flores -->
     <div class="flower flower--1">
       <div class="flower__leafs flower__leafs--1">
         <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(0deg);"></div>
@@ -1075,6 +1055,7 @@
         <div class="flower__line__leaf flower__line__leaf--4"></div>
       </div>
     </div>
+
     <div class="flower flower--3">
       <div class="flower__leafs flower__leafs--3">
         <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(0deg);"></div>
@@ -1315,81 +1296,79 @@
   </div>
 
   <script>
-    onload = () => {
-      const c = setTimeout(() => {
-        document.body.classList.remove("not-loaded");
+    // Frases aleatorias con sistema que evita repeticiones
+    const phrases = [
+      "Eres la mejor niña.",
+      "Siempre pienso en mi princesita.",
+      "Tú eres mi alegría.",
+      "Mi solecito.",
+      "Tu sonrisa ilumina mis días.",
+      "Eres mi razón para sonreír.",
+      "Eres única y especial.",
+      "Me haces muy feliz."
+    ];
+    let usedPhrases = [];
+    let availablePhrases = [...phrases];
 
-        // Frases aleatorias con sistema que evita repeticiones
-        const phrases = [
-          "Eres la mejor niña.",
-          "Siempre pienso en mi princesita.",
-          "Tú eres mi alegría.",
-          "Mi solecito.",
-          "Tu sonrisa ilumina mis días.",
-          "Eres mi razón para sonreír.",
-          "Eres única y especial.",
-          "Me haces muy feliz."
-        ];
+    function showRandomPhrase() {
+      // Si ya se usaron todas las frases, reiniciamos
+      if (availablePhrases.length === 0) {
+        availablePhrases = [...phrases];
+        usedPhrases = [];
+      }
+      
+      // Seleccionar una frase aleatoria de las disponibles
+      const randomIndex = Math.floor(Math.random() * availablePhrases.length);
+      const selectedPhrase = availablePhrases[randomIndex];
+      
+      // Mover la frase de disponibles a usadas
+      availablePhrases.splice(randomIndex, 1);
+      usedPhrases.push(selectedPhrase);
+      
+      const phraseElement = document.querySelector('.random-text');
+      phraseElement.textContent = selectedPhrase;
+      
+      // Posiciones aleatorias en la pantalla
+      const randomTop = Math.floor(Math.random() * 70) + 15; // 15% a 85%
+      const randomLeft = Math.floor(Math.random() * 70) + 15; // 15% a 85%
+      
+      phraseElement.style.top = randomTop + '%';
+      phraseElement.style.left = randomLeft + '%';
+      phraseElement.style.transform = 'translate(-50%, -50%)';
+      
+      // Reiniciar animación
+      phraseElement.style.animation = 'none';
+      setTimeout(() => {
+        phraseElement.style.animation = 'fadeInOut 8s forwards';
+      }, 10);
+    }
 
-        let usedPhrases = [];
-        let availablePhrases = [...phrases];
+    // Mostrar una frase aleatoria cada 10 segundos
+    setTimeout(() => {
+      showRandomPhrase();
+      setInterval(showRandomPhrase, 10000);
+    }, 2000);
 
-        function showRandomPhrase() {
-          // Si ya se usaron todas las frases, reiniciamos
-          if (availablePhrases.length === 0) {
-            availablePhrases = [...phrases];
-            usedPhrases = [];
-          }
-          
-          // Seleccionar una frase aleatoria de las disponibles
-          const randomIndex = Math.floor(Math.random() * availablePhrases.length);
-          const selectedPhrase = availablePhrases[randomIndex];
-          
-          // Mover la frase de disponibles a usadas
-          availablePhrases.splice(randomIndex, 1);
-          usedPhrases.push(selectedPhrase);
-          
-          const phraseElement = document.querySelector('.random-text');
-          phraseElement.textContent = selectedPhrase;
-          
-          // Posiciones aleatorias en la pantalla
-          const randomTop = Math.floor(Math.random() * 70) + 15; // 15% a 85%
-          const randomLeft = Math.floor(Math.random() * 70) + 15; // 15% a 85%
-          
-          phraseElement.style.top = randomTop + '%';
-          phraseElement.style.left = randomLeft + '%';
-          phraseElement.style.transform = 'translate(-50%, -50%)';
-          
-          // Aplicar animación
-          phraseElement.style.animation = 'fadeInOut 8s forwards';
-        }
+    function createShootingStar() {
+      const star = document.createElement('div');
+      star.className = 'shooting-star';
+      star.style.top = Math.random() * 60 + '%';
+      star.style.animationDelay = '0s';
+      star.style.animationDuration = (Math.random() * 1.5 + 2) + 's';
 
-        // Mostrar una frase aleatoria cada 10 segundos
-        showRandomPhrase();
-        setInterval(showRandomPhrase, 10000);
+      document.querySelector('.shooting-stars').appendChild(star);
 
-        function createShootingStar() {
-          const star = document.createElement('div');
-          star.className = 'shooting-star';
-          star.style.top = Math.random() * 60 + '%';
-          star.style.animationDelay = '0s';
-          star.style.animationDuration = (Math.random() * 1.5 + 2) + 's';
+      setTimeout(() => {
+        star.remove();
+      }, 4000);
+    }
 
-          document.querySelector('.shooting-stars').appendChild(star);
-
-          setTimeout(() => {
-            star.remove();
-          }, 4000);
-        }
-
-        setInterval(() => {
-          if (Math.random() > 0.3) { 
-            createShootingStar();
-          }
-        }, Math.random() * 5000 + 3000);
-        clearTimeout(c);
-      }, 1000);
-    };
+    // Crear estrellas fugaces
+    setInterval(() => {
+      if (Math.random() > 0.3) { 
+        createShootingStar();
+      }
+    }, Math.random() * 5000 + 3000);
   </script>
 </body>
 </html>
