@@ -71,7 +71,6 @@
           opacity: 0;
           animation: shootingStar 3s linear infinite;
         }
-
         .shooting-star::before {
           content: '';
           position: absolute;
@@ -212,7 +211,6 @@
           transform: rotate(20deg);
           animation: moving-flower-2 4s linear infinite;
         }
-
         .flower--2 .flower__line {
           height: 60vmin;
           animation-delay: 0.6s;
@@ -287,6 +285,7 @@
         .flower--4 .flower__line__leaf--4 {
           animation: blooming-leaf-left var(--fl-speed) 2.2s backwards;
         }
+
         .flower--5 {
           left: 75%;
           z-index: -7;
@@ -396,6 +395,7 @@
           box-shadow: inset 0 0 2vmin rgba(0, 0, 0, 0.8),
                       0 0 1vmin rgba(139, 69, 19, 0.6);
         }
+
         .flower__white-circle::after {
           content: "";
           position: absolute;
@@ -607,7 +607,7 @@
           margin-top: -2px;
           width: var(--line-w);
           height: 25vmin;
-          background-image: linear-gradient(to top, transparent, var(--c));
+          background-image: linear-gradient(to top, transparent, var(--c);
         }
 
         .flower__grass__leaf {
@@ -657,6 +657,7 @@
           transform: rotate(2deg);
           animation: growing-grass-ans--4 var(--speed-leaf) 2s linear backwards;
         }
+
         .flower__grass__leaf--5 {
           top: 20%;
           left: 60%;
@@ -700,137 +701,64 @@
           z-index: 100;
         }
 
+        /* Estilos para el texto principal */
+        .special-text {
+            position: fixed;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            font-size: 3.5vmin;
+            text-shadow: 0 0 1vmin rgba(255, 255, 255, 0.5);
+            z-index: 10;
+            text-align: center;
+            width: 90%;
+            max-width: 800px;
+        }
 
+        .typewriter-line {
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.05em;
+            width: 0;
+        }
 
-/* Estilos para el texto principal */
-.special-text {
-    position: fixed;
-    top: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #fff;
-    font-family: 'Arial', sans-serif;
-    font-size: 3.5vmin;
-    text-shadow: 0 0 1vmin rgba(255, 255, 255, 0.5);
-    z-index: 10;
-    text-align: center;
-    width: 90%;
-    max-width: 800px;
-}
+        .first-line {
+            border-right: 0.15em solid orange;
+            animation: typing-first 4s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
+        }
 
-.typewriter-line {
-    overflow: hidden;
-    white-space: nowrap;
-    margin: 0 auto;
-    letter-spacing: 0.05em;
-    width: 0;
-    opacity: 1 !important;
-}
+        .second-line {
+            border-right: 0.15em solid orange;
+            animation: typing-second 3s steps(30, end) 4.5s forwards, blink-caret 0.75s step-end infinite;
+            margin-top: 2vmin;
+        }
 
-.first-line {
-    border-right: 0.15em solid orange;
-    animation: typing-first 4s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
-}
-
-.second-line {
-    border-right: 0.15em solid orange;
-    animation: typing-second 3s steps(30, end) 4.5s forwards, blink-caret 0.75s step-end infinite;
-    margin-top: 2vmin;
-}
-
-/* KEYFRAMES */
-@keyframes typing-first {
-    from { width: 0 }
-    to { width: 100% }
-}
-
-@keyframes typing-second {
-    from { width: 0 }
-    to { width: 100% }
-}
-
-@keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: orange; }
-}
-
-/* Estilos para las frases aleatorias */
-.random-text {
-    position: fixed;
-    color: #fff;
-    font-family: 'Arial', sans-serif;
-    font-size: 2.8vmin;
-    text-shadow: 0 0 1vmin rgba(255, 255, 255, 0.5);
-    z-index: 10;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 15px;
-    border-radius: 10px;
-    max-width: 300px;
-    opacity: 0;
-}
-
-@keyframes fadeInOut {
-    0% { opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { opacity: 0; }
-}
-
-let usedPhrases = [];
-let availablePhrases = [...phrases];
-
-function showRandomPhrase() {
-    // Si ya se usaron todas las frases, reiniciamos
-    if (availablePhrases.length === 0) {
-        availablePhrases = [...phrases];
-        usedPhrases = [];
-    }
-    
-    // Seleccionar una frase aleatoria de las disponibles
-    const randomIndex = Math.floor(Math.random() * availablePhrases.length);
-    const selectedPhrase = availablePhrases[randomIndex];
-    
-    // Mover la frase de disponibles a usadas
-    availablePhrases.splice(randomIndex, 1);
-    usedPhrases.push(selectedPhrase);
-    
-    const phraseElement = document.querySelector('.random-text');
-    phraseElement.textContent = selectedPhrase;
-    
-    // Posiciones aleatorias en la pantalla
-    const randomTop = Math.floor(Math.random() * 70) + 15; // 15% a 85%
-    const randomLeft = Math.floor(Math.random() * 70) + 15; // 15% a 85%
-    
-    phraseElement.style.top = randomTop + '%';
-    phraseElement.style.left = randomLeft + '%';
-    phraseElement.style.transform = 'translate(-50%, -50%)';
-    
-    phraseElement.style.animation = 'none';
-    setTimeout(() => {
-        phraseElement.style.animation = 'fadeInOut 8s infinite';
-    }, 10);
-}
-
-// Mostrar una frase aleatoria cada 10 segundos
-showRandomPhrase();
-setInterval(showRandomPhrase, 10000);
+        /* Estilos para las frases aleatorias */
+        .random-text {
+            position: fixed;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            font-size: 2.8vmin;
+            text-shadow: 0 0 1vmin rgba(255, 255, 255, 0.5);
+            z-index: 10;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 300px;
+            opacity: 0;
+        }
 
         /* KEYFRAMES */
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
+        @keyframes typing-first {
+            from { width: 0 }
+            to { width: 100% }
         }
 
-        @keyframes fadeInOut {
-            0% { opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        @keyframes typing {
+        @keyframes typing-second {
             from { width: 0 }
             to { width: 100% }
         }
@@ -838,6 +766,13 @@ setInterval(showRandomPhrase, 10000);
         @keyframes blink-caret {
             from, to { border-color: transparent }
             50% { border-color: orange; }
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; }
         }
 
         .grow-ans {
@@ -947,6 +882,7 @@ setInterval(showRandomPhrase, 10000);
             opacity: 0;
           }
         }
+
         @keyframes moving-flower-1 {
           0%, 100% { transform: rotate(2deg); }
           50% { transform: rotate(-2deg); }
@@ -1054,12 +990,12 @@ setInterval(showRandomPhrase, 10000);
 <body class="not-loaded">
   <div class="night"></div>
 
-<<div class="special-text">
+  <div class="special-text">
     <div class="typewriter-line first-line">Las flores amarillas representan la felicidad ☺️.</div>
     <div class="typewriter-line second-line">Y tú eres la mía ❤️</div>
-</div>
+  </div>
 
-<div class="random-text"></div>
+  <div class="random-text"></div>
 
   <div class="shooting-stars">
     <div class="shooting-star"></div>
@@ -1073,6 +1009,7 @@ setInterval(showRandomPhrase, 10000);
   </div>
 
   <div class="flowers">
+    <!-- Todo el código de las flores se mantiene igual -->
     <div class="flower flower--1">
       <div class="flower__leafs flower__leafs--1">
         <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(0deg);"></div>
@@ -1138,7 +1075,6 @@ setInterval(showRandomPhrase, 10000);
         <div class="flower__line__leaf flower__line__leaf--4"></div>
       </div>
     </div>
-
     <div class="flower flower--3">
       <div class="flower__leafs flower__leafs--3">
         <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(0deg);"></div>
@@ -1171,6 +1107,7 @@ setInterval(showRandomPhrase, 10000);
         <div class="flower__line__leaf flower__line__leaf--4"></div>
       </div>
     </div>
+
     <div class="flower flower--4">
       <div class="flower__leafs flower__leafs--4">
         <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(0deg);"></div>
@@ -1219,6 +1156,7 @@ setInterval(showRandomPhrase, 10000);
         <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(300deg);"></div>
         <div class="flower__leaf" style="transform: translate(-50%, -10%) rotate(330deg);"></div>
         <div class="flower__white-circle"></div>
+
         <div class="flower__light flower__light--1"></div>
         <div class="flower__light flower__light--2"></div>
         <div class="flower__light flower__light--3"></div>
@@ -1352,6 +1290,7 @@ setInterval(showRandomPhrase, 10000);
         <div class="flower__grass__overlay"></div>
       </div>
     </div>
+
     <div class="growing-grass">
       <div class="flower__grass flower__grass--9">
         <div class="flower__grass--top"></div>
@@ -1380,59 +1319,77 @@ setInterval(showRandomPhrase, 10000);
       const c = setTimeout(() => {
         document.body.classList.remove("not-loaded");
 
- // Frases aleatorias con sistema que evita repeticiones
-const phrases = [
-    "Eres la mejor niña.",
-    "Siempre pienso en mi princesita.",
-    "Tú eres mi alegría.",
-    "Mi solecito.",
-    "Tu sonrisa ilumina mis días.",
-    "Eres mi razón para sonreír.",
-    "Eres única y especial.",
-    "Me haces muy feliz."
-];
+        // Frases aleatorias con sistema que evita repeticiones
+        const phrases = [
+          "Eres la mejor niña.",
+          "Siempre pienso en mi princesita.",
+          "Tú eres mi alegría.",
+          "Mi solecito.",
+          "Tu sonrisa ilumina mis días.",
+          "Eres mi razón para sonreír.",
+          "Eres única y especial.",
+          "Me haces muy feliz."
+        ];
 
-let usedPhrases = [];
-let availablePhrases = [...phrases];
+        let usedPhrases = [];
+        let availablePhrases = [...phrases];
 
-function showRandomPhrase() {
-    // Si ya se usaron todas las frases, reiniciamos
-    if (availablePhrases.length === 0) {
-        availablePhrases = [...phrases];
-        usedPhrases = [];
-    }
-    
-    // Seleccionar una frase aleatoria de las disponibles
-    const randomIndex = Math.floor(Math.random() * availablePhrases.length);
-    const selectedPhrase = availablePhrases[randomIndex];
-    
-    // Mover la frase de disponibles a usadas
-    availablePhrases.splice(randomIndex, 1);
-    usedPhrases.push(selectedPhrase);
-    
-    const phraseElement = document.querySelector('.random-text');
-    phraseElement.textContent = selectedPhrase;
-    
-    // Posiciones aleatorias en la pantalla
-    const randomTop = Math.floor(Math.random() * 70) + 15; // 15% a 85%
-    const randomLeft = Math.floor(Math.random() * 70) + 15; // 15% a 85%
-    
-    phraseElement.style.top = randomTop + '%';
-    phraseElement.style.left = randomLeft + '%';
-    phraseElement.style.transform = 'translate(-50%, -50%)';
-    
-    // Aplicar animación
-    phraseElement.style.animation = 'fadeInOut 8s forwards';
-}
+        function showRandomPhrase() {
+          // Si ya se usaron todas las frases, reiniciamos
+          if (availablePhrases.length === 0) {
+            availablePhrases = [...phrases];
+            usedPhrases = [];
+          }
+          
+          // Seleccionar una frase aleatoria de las disponibles
+          const randomIndex = Math.floor(Math.random() * availablePhrases.length);
+          const selectedPhrase = availablePhrases[randomIndex];
+          
+          // Mover la frase de disponibles a usadas
+          availablePhrases.splice(randomIndex, 1);
+          usedPhrases.push(selectedPhrase);
+          
+          const phraseElement = document.querySelector('.random-text');
+          phraseElement.textContent = selectedPhrase;
+          
+          // Posiciones aleatorias en la pantalla
+          const randomTop = Math.floor(Math.random() * 70) + 15; // 15% a 85%
+          const randomLeft = Math.floor(Math.random() * 70) + 15; // 15% a 85%
+          
+          phraseElement.style.top = randomTop + '%';
+          phraseElement.style.left = randomLeft + '%';
+          phraseElement.style.transform = 'translate(-50%, -50%)';
+          
+          // Aplicar animación
+          phraseElement.style.animation = 'fadeInOut 8s forwards';
+        }
 
-// Iniciar animaciones después de que la página cargue
-setTimeout(() => {
-    // Mostrar una frase aleatoria cada 10 segundos
-    showRandomPhrase();
-    setInterval(showRandomPhrase, 10000);
-}, 1000);
+        // Mostrar una frase aleatoria cada 10 segundos
+        showRandomPhrase();
+        setInterval(showRandomPhrase, 10000);
 
+        function createShootingStar() {
+          const star = document.createElement('div');
+          star.className = 'shooting-star';
+          star.style.top = Math.random() * 60 + '%';
+          star.style.animationDelay = '0s';
+          star.style.animationDuration = (Math.random() * 1.5 + 2) + 's';
+
+          document.querySelector('.shooting-stars').appendChild(star);
+
+          setTimeout(() => {
+            star.remove();
+          }, 4000);
+        }
+
+        setInterval(() => {
+          if (Math.random() > 0.3) { 
+            createShootingStar();
+          }
+        }, Math.random() * 5000 + 3000);
+        clearTimeout(c);
+      }, 1000);
+    };
   </script>
-<div class="random-text"></div>
 </body>
 </html>
