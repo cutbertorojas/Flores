@@ -965,9 +965,31 @@
           0%, 100% { transform: scale(0.35) rotate(-45deg) rotateY(-120deg); }
           50% { transform: scale(0.35) rotate(-42deg) rotateY(-115deg); }
         }
+
+
+
+/* Audio oculto - no necesita controles visibles */
+audio {
+  display: none;
+}
+
+
+
+
     </style>
 </head>
 <body>
+
+
+
+<!-- Audio oculto con tu música -->
+<audio id="backgroundMusic" loop>
+  <source src="https://youtu.be/YNqug5jirKc?si=bWCAzN6DEpxGI77M" type="audio/mp3">
+  Tu navegador no soporta audio HTML5.
+</audio>
+
+
+
   <div class="night"></div>
 
   <div class="special-text">
@@ -1369,6 +1391,29 @@
         createShootingStar();
       }
     }, Math.random() * 5000 + 3000);
+
+
+
+
+
+// Control de música automática
+const audio = document.getElementById('backgroundMusic');
+
+// Configurar volumen bajo (30%)
+audio.volume = 0.3;
+
+// Reproducir automáticamente después de un breve delay
+setTimeout(() => {
+  audio.play().catch(error => {
+    console.log('Reproducción automática bloqueada:', error);
+    // Si falla la reproducción automática, no hay problema
+  });
+}, 1000);
+
+
+
+
+
   </script>
 </body>
 </html>
