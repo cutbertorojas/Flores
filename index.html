@@ -983,11 +983,56 @@ audio {
 
 
 
-<!-- Audio oculto -->
+<!-- Reproductor de audio oculto -->
 <audio id="backgroundMusic" loop>
-  <source src="https://github.com/cutbertorojas/Flores/blob/main/Rels%20B%20-%20Te%20Regalo.mp3" type="audio/mp3">
-  Tu navegador no soporta audio.
-</audio>>
+  <source src="https://github.com/cutbertorojas/Flores/raw/main/Te%20Regalo.mp3" type="audio/mp3">
+  Tu navegador no soporta el elemento de audio.
+</audio>
+
+<!-- Botón de activación opcional (aparece si el autoplay falla) -->
+<div id="musicButton" style="display: none; position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+  <button onclick="enableAudio()" style="padding: 10px 15px; background: rgba(0,0,0,0.7); color: white; border: 2px solid #ffd700; border-radius: 25px; cursor: pointer;">🎵 Activar música</button>
+</div>/audio>>
+
+<script>
+// Esperar a que la página cargue
+document.addEventListener('DOMContentLoaded', function() {
+  const audio = document.getElementById('backgroundMusic');
+  const musicButton = document.getElementById('musicButton');
+  
+  // Configurar volumen bajo (30%)
+  audio.volume = 0.3;
+  
+  // Intentar reproducción automática después de un retardo
+  setTimeout(() => {
+    const playPromise = audio.play();
+    
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        // Mostrar botón si la reproducción automática falla
+        musicButton.style.display = 'block';
+      });
+    }
+  }, 2000);
+});
+
+// Función para activar audio manualmente
+function enableAudio() {
+  const audio = document.getElementById('backgroundMusic');
+  const musicButton = document.getElementById('musicButton');
+  
+  audio.play()
+    .then(() => {
+      musicButton.style.display = 'none';
+    })
+    .catch(error => {
+      console.error('Error al reproducir audio:', error);
+    });
+}
+</script>
+
+
+
 
 
 
@@ -1393,53 +1438,6 @@ audio {
         createShootingStar();
       }
     }, Math.random() * 5000 + 3000);
-
-
-
-
-
-// Reproducir música automáticamente
-setTimeout(() => {
-  const audio = document.getElementById('backgroundMusic');
-  audio.volume = 0.3; // Volumen al 30%
-  
-  // Intentar reproducir automáticamente
-  const playPromise = audio.play();
-  
-  if (playPromise !== undefined) {
-    playPromise.catch(error => {
-      console.log('Reproducción automática bloqueada, mostrando botón...');
-      
-      // Crear botón de activación si falla
-      const playBtn = document.createElement('button');
-      playBtn.innerHTML = '🎵 Activar música';
-      playBtn.style.position = 'fixed';
-      playBtn.style.bottom = '20px';
-      playBtn.style.right = '20px';
-      playBtn.style.zIndex = '1000';
-      playBtn.style.padding = '10px 20px';
-      playBtn.style.background = 'rgba(0, 0, 0, 0.7)';
-      playBtn.style.color = 'white';
-      playBtn.style.border = '2px solid #ffd700';
-      playBtn.style.borderRadius = '25px';
-      playBtn.style.cursor = 'pointer';
-      playBtn.style.fontFamily = 'Arial, sans-serif';
-      playBtn.style.fontSize = '14px';
-      playBtn.style.boxShadow = '0 0 10px rgba(255, 215, 0, 0.5)';
-      
-      playBtn.onclick = () => {
-        audio.play();
-        playBtn.remove();
-      };
-      
-      document.body.appendChild(playBtn);
-    });
-  }
-}, 3000);
-
-
-
-
 
   </script>
 </body>
