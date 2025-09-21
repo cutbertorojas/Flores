@@ -982,12 +982,8 @@ audio {
 
 
 
-<!-- Audio oculto con tu música -->
-<audio id="backgroundMusic" loop>
-  <source src="https://youtu.be/YNqug5jirKc?si=bWCAzN6DEpxGI77M" type="audio/mp3">
-  Tu navegador no soporta audio HTML5.
-</audio>
-
+<<!-- Reproductor de YouTube oculto -->
+<div id="youtubePlayer" style="display: none;"></div>
 
 
   <div class="night"></div>
@@ -1396,20 +1392,46 @@ audio {
 
 
 
-// Control de música automática
-const audio = document.getElementById('backgroundMusic');
+// Cargar API de YouTube
+const tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+const firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-// Configurar volumen bajo (30%)
-audio.volume = 0.3;
-
-// Reproducir automáticamente después de un breve delay
-setTimeout(() => {
-  audio.play().catch(error => {
-    console.log('Reproducción automática bloqueada:', error);
-    // Si falla la reproducción automática, no hay problema
+let player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('youtubePlayer', {
+    height: '0',
+    width: '0',
+    videoId: 'YNqug5jirKc', // ID de tu video
+    playerVars: {
+      'autoplay': 1,
+      'loop': 1,
+      'playlist': 'YNqug5jirKc', // Necesario para loop
+      'controls': 0,
+      'showinfo': 0,
+      'modestbranding': 1,
+      'rel': 0
+    },
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange
+    }
   });
-}, 1000);
+}
 
+function onPlayerReady(event) {
+  // Volumen al 30% (bajo)
+  event.target.setVolume(30);
+  event.target.playVideo();
+}
+
+function onPlayerStateChange(event) {
+  // Repetir cuando termine (por si acaso)
+  if (event.data === YT.PlayerState.ENDED) {
+    player.playVideo();
+  }
+}
 
 
 
