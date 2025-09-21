@@ -982,8 +982,14 @@ audio {
 
 
 
-<<!-- Reproductor de YouTube oculto -->
-<div id="youtubePlayer" style="display: none;"></div>
+
+<!-- Audio oculto -->
+<audio id="backgroundMusic" loop>
+  <source src="https://github.com/cutbertorojas/Flores/blob/main/Rels%20B%20-%20Te%20Regalo.mp3" type="audio/mp3">
+  Tu navegador no soporta audio.
+</audio>>
+
+
 
 
   <div class="night"></div>
@@ -1392,46 +1398,45 @@ audio {
 
 
 
-// Cargar API de YouTube
-const tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-const firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-let player;
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('youtubePlayer', {
-    height: '0',
-    width: '0',
-    videoId: 'YNqug5jirKc', // ID de tu video
-    playerVars: {
-      'autoplay': 1,
-      'loop': 1,
-      'playlist': 'YNqug5jirKc', // Necesario para loop
-      'controls': 0,
-      'showinfo': 0,
-      'modestbranding': 1,
-      'rel': 0
-    },
-    events: {
-      'onReady': onPlayerReady,
-      'onStateChange': onPlayerStateChange
-    }
-  });
-}
-
-function onPlayerReady(event) {
-  // Volumen al 30% (bajo)
-  event.target.setVolume(30);
-  event.target.playVideo();
-}
-
-function onPlayerStateChange(event) {
-  // Repetir cuando termine (por si acaso)
-  if (event.data === YT.PlayerState.ENDED) {
-    player.playVideo();
+// Reproducir música automáticamente
+setTimeout(() => {
+  const audio = document.getElementById('backgroundMusic');
+  audio.volume = 0.3; // Volumen al 30%
+  
+  // Intentar reproducir automáticamente
+  const playPromise = audio.play();
+  
+  if (playPromise !== undefined) {
+    playPromise.catch(error => {
+      console.log('Reproducción automática bloqueada, mostrando botón...');
+      
+      // Crear botón de activación si falla
+      const playBtn = document.createElement('button');
+      playBtn.innerHTML = '🎵 Activar música';
+      playBtn.style.position = 'fixed';
+      playBtn.style.bottom = '20px';
+      playBtn.style.right = '20px';
+      playBtn.style.zIndex = '1000';
+      playBtn.style.padding = '10px 20px';
+      playBtn.style.background = 'rgba(0, 0, 0, 0.7)';
+      playBtn.style.color = 'white';
+      playBtn.style.border = '2px solid #ffd700';
+      playBtn.style.borderRadius = '25px';
+      playBtn.style.cursor = 'pointer';
+      playBtn.style.fontFamily = 'Arial, sans-serif';
+      playBtn.style.fontSize = '14px';
+      playBtn.style.boxShadow = '0 0 10px rgba(255, 215, 0, 0.5)';
+      
+      playBtn.onclick = () => {
+        audio.play();
+        playBtn.remove();
+      };
+      
+      document.body.appendChild(playBtn);
+    });
   }
-}
+}, 3000);
+
 
 
 
